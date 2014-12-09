@@ -1,4 +1,4 @@
-- view: tracks_sessions_map
+- view: tracks_sessions_map # Determines event sequence numbers within session
 
   derived_table:
     sql: |

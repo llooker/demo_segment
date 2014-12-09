@@ -1,4 +1,4 @@
-- explore: session_facts
+- explore: session_fact # Determines time session ended at and number of events in session
 - view: session_facts
   derived_table:
     sql: |
@@ -23,6 +23,18 @@
   - dimension: user_id
     hidden: true
     sql: ${TABLE}.user_id
+  
+#   - dimension: carrier
+#     sql: ${TABLE}.carrier
+#   
+#   - dimension: device_manufacturer
+#     sql: ${TABLE}.device_manufacturer
+#   
+#   - dimension: device_model
+#     sql: ${TABLE}.device_model
+# 
+#   - dimension: os
+#     sql: ${TABLE}.os
 
   - dimension: sessionidx
     hidden: true
@@ -40,9 +52,39 @@
     type: number
     sql: ${TABLE}.num_pvs
   
-  - measure: count
-    type: count
+  - dimension: number_events_tiered
+    type: tier
+    sql: ${number_events}
+    tiers: [1,5,10,20,30,60]
+  
+#   - measure: count
+#     type: count
+  
+  - dimension: is_bounced
+    sql: CASE 
+            WHEN ${number_events} = 1 THEN 'Bounced Session'
+            ELSE 'Not Bounced' END
+  
+  - dimension: session_duration_minutes
+    type: number
+    sql: DATEDIFF(minutes, ${sessions.start_time}::timestamp, ${ended_at_time}::timestamp)
+    
+  - dimension: session_duration_minutes_tiered
+    type: tier
+    sql: ${session_duration_minutes}
+    tiers: [1,5,10,20,30,60]
+  
+  - measure: avg_session_duration_minutes
+    type: average
+    sql: ${session_duration_minutes}
+  
+  - measure: avg_events_per_session
+    type: average
+    sql: ${number_events}
+  
 
+
+  
   sets:
     detail:
       - user_id

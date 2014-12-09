@@ -29,6 +29,9 @@
     - join: user_track_facts
       foreign_key: user_id
     
+    - join: user_session_facts
+      foreign_key: user_id
+    
     - join: session_facts
       sql_on: |
         sessions.user_id = session_facts.user_id

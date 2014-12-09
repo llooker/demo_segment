@@ -63,6 +63,62 @@
     width: 4
     height: 2
 
+  - name: add_a_unique_name_313
+    title: Carrier Breakdown
+    type: looker_pie
+    model: demo_segment
+    explore: tracks
+    dimensions: [tracks.context_carrier]
+    measures: [tracks.count]
+    filters:
+      tracks.context_carrier: -NULL
+    sorts: [tracks.count desc]
+    limit: 500
+    width: 4
+    height: 2
+  
+#   - name: add_a_unique_name_203
+#     title: Manufacturer Breakdown
+#     type: looker_pie
+#     model: demo_segment
+#     explore: tracks
+#     dimensions: [tracks.context_device_manufacturer]
+#     measures: [tracks.count]
+#     filters:
+#       tracks.context_device_manufacturer: -NULL
+#     sorts: [tracks.count desc]
+#     limit: 500
+#     width: 3
+#     height: 3
+  
+  - name: add_a_unique_name_769
+    title: Device Type Breakdown
+    type: looker_pie
+    model: demo_segment
+    explore: tracks
+    dimensions: [tracks.context_device_type]
+    measures: [tracks.count]
+    filters:
+      tracks.context_device_type: -NULL
+    sorts: [tracks.count desc]
+    limit: 500
+    width: 4
+    height: 2
+  
+  - name: add_a_unique_name_11
+    title: Top Device Models
+    type: table
+    model: demo_segment
+    explore: tracks
+    dimensions: [tracks.context_device_model]
+    measures: [tracks.count]
+    filters:
+      tracks.context_device_model: -NULL
+    sorts: [tracks.count desc]
+    limit: 50
+    width: 4
+    height: 2
+    
   - name: add_a_unique_name_110
     title: Daily Tracks Count
     type: looker_line
@@ -172,35 +228,6 @@
     x_axis_scale: auto
     point_style: none
     interpolation: linear
-
-  
-  - name: add_a_unique_name_954
-    title: Count Users Tracked by First Visit Week
-    type: looker_line
-    model: demo_segment
-    explore: tracks
-    dimensions: [user_track_facts.first_track_week, tracks.weeks_since_first_visit]
-    pivots: [user_track_facts.first_track_week]
-    measures: [tracks.count_users]
-    filters:
-      user_track_facts.first_track_week: 4 months
-    sorts: [user_track_facts.first_track_week, tracks.weeks_since_first_visit]
-    limit: 500
-    show_null_points: false
-    stacking: ''
-    show_value_labels: false
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    point_style: none
-    interpolation: linear
-    width: 12
-    
 
 
 
