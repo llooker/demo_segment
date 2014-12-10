@@ -38,7 +38,29 @@
         CASE 
         WHEN ${start_date} = ${user_track_facts.first_track_date} THEN 'New User'
         ELSE 'Returning User' END
+  
+  - dimension: days_since_first_session
+    type: number
+    sql: ${start_date} - ${user_session_facts.first_date}
+  
+  - dimension: weeks_since_first_session
+    type: int
+    sql: FLOOR(${days_since_first_session}/7)
+  
+  - dimension: weeks_since_first_session_tier
+    type: tier
+    tiers: [1,2,4,8,16]
+    sql: ${weeks_since_first_session}
     
+  - dimension: months_since_first_session
+    type: int
+    sql: FLOOR(${days_since_first_session}/30)
+    
+  - dimension: months_since_first_session_tier
+    type: tier
+    tiers: [1,3,6,12,24]
+    sql: ${months_since_first_session}
+  
   - dimension: context_device_model
     sql: ${TABLE}.context_device_model
     

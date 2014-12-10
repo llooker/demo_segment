@@ -1,7 +1,10 @@
 - view: user_session_facts
-
   derived_table:
-      sql: |
+    sql_trigger_value: SELECT CURRENT_DATE
+    distkey: user_id
+    sortkeys: [user_id]
+    
+    sql: |
         SELECT 
           user_id                               
           , MIN(DATE(session_start)) as first_date              
@@ -25,4 +28,14 @@
       type: tier
       sql: ${number_of_sessions}
       tiers: [1,2,3,4,5,10]
-
+    
+    - dimension_group: first
+      type: time
+      timeframes: [date, week, month]
+      sql: ${TABLE}.first_date
+    
+    - dimension_group: last
+      type: time
+      timeframes: [date, week, month]
+      sql: ${TABLE}.last_date
+      
