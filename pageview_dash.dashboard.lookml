@@ -62,6 +62,8 @@
     explore: pages
     measures: [pages.avg_page_view_duration_minutes]
     sorts: [pages.avg_page_view_duration_minutes desc]
+    listen: 
+      date: pages.sent_date
     limit: 500
     font_size: medium
     width: 3
