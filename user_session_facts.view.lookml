@@ -5,13 +5,13 @@
     sortkeys: [user_id]
     
     sql: |
-        SELECT 
-          user_id                               
-          , MIN(DATE(session_start)) as first_date              
-          , MAX(DATE(session_start)) as last_date                
-          , COUNT(*) as number_of_sessions                        
-        FROM ${sessions.SQL_TABLE_NAME}
-        GROUP BY 1
+      SELECT 
+        user_id                               
+        , MIN(DATE(session_start)) as first_date              
+        , MAX(DATE(session_start)) as last_date                
+        , COUNT(*) as number_of_sessions                        
+      FROM ${sessions.SQL_TABLE_NAME}
+      GROUP BY 1
       
   fields:
 #     Define your dimensions and measures here, like this:
