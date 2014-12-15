@@ -9,10 +9,13 @@
       (SELECT distinct previous_id
           , user_id 
       FROM hoodie.aliases as a1
-      WHERE a1.previous_id <> a1.user_id
+      WHERE a1.previous_id <> a1.user_id UNION
+      SELECT distinct anonymous_id as previous_id
+          , user_id 
+      FROM hoodie.aliases 
       )
       
-      SELECT a1.previous_id
+      SELECT distinct a1.previous_id
             , coalesce (a6.user_id, a5.user_id, a4.user_id, a3.user_id, a2.user_id, a1.user_id) as mapped_user_id
       FROM aliases_no_dupes AS a1
       LEFT JOIN aliases_no_dupes AS a2
