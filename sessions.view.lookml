@@ -10,7 +10,7 @@
                  , sent_at
           FROM hoodie.tracks AS e1
           LEFT JOIN ${aliases_mapping.SQL_TABLE_NAME} AS e2
-          ON e1.user_id = e2.previous_id
+          ON coalesce(e1.user_id, e1.anonymous_id) = e2.previous_id  
 
 
 - view: sessions  # Creates sessions by mapped user_id with 30 minute idle timeout window
