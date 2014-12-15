@@ -8,7 +8,7 @@
                   , count(distinct pv.event_id) AS num_pvs
                 FROM ${sessions.SQL_TABLE_NAME} AS s
                   LEFT JOIN ${tracks_sessions_map.SQL_TABLE_NAME} as map USING(user_id, sessionidx)
-                  LEFT JOIN hoodie.tracks pv USING(event_id)
+                  LEFT JOIN ${mapped_tracks.SQL_TABLE_NAME} pv USING(event_id)
                 GROUP BY s.user_id
                   , s.sessionidx
                   , s.next_session_start
@@ -23,18 +23,6 @@
   - dimension: user_id
     hidden: true
     sql: ${TABLE}.user_id
-  
-#   - dimension: carrier
-#     sql: ${TABLE}.carrier
-#   
-#   - dimension: device_manufacturer
-#     sql: ${TABLE}.device_manufacturer
-#   
-#   - dimension: device_model
-#     sql: ${TABLE}.device_model
-# 
-#   - dimension: os
-#     sql: ${TABLE}.os
 
   - dimension: sessionidx
     hidden: true

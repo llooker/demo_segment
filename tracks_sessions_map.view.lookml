@@ -6,7 +6,7 @@
               , s.user_id
               , s.sessionidx
               , row_number() over(partition by s.user_id, s.sessionidx order by pv.sent_at) as sess_pv_seq_num
-            from hoodie.tracks pv
+            from ${mapped_tracks.SQL_TABLE_NAME} pv
             inner join ${sessions.SQL_TABLE_NAME}  as  s
               on pv.user_id = s.user_id
               and pv.sent_at >= s.session_start

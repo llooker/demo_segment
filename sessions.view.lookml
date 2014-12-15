@@ -1,4 +1,19 @@
-- view: sessions  # Creates sessions by user_id with 30 minute idle timeout window
+
+- view: mapped_tracks  # Tracks mapped to user id
+  derived_table:
+    sql_trigger_value: SELECT CURRENT_DATE
+    distkey: event_id
+    sortkeys: [event_id]  
+    sql:  |
+          SELECT event_id 
+                 , coalesce(e2.mapped_user_id, e1.user_id, e1.anonymous_id) as user_id
+                 , sent_at
+          FROM hoodie.tracks AS e1
+          LEFT JOIN ${aliases_mapping.SQL_TABLE_NAME} AS e2
+          ON e1.user_id = e2.previous_id
+
+
+- view: sessions  # Creates sessions by mapped user_id with 30 minute idle timeout window
   derived_table:
     sql_trigger_value: SELECT CURRENT_DATE
     distkey: start_event_id
@@ -8,16 +23,15 @@
               , lag.user_id
               , lag.e_tstamp AS session_start
               , lag.idle_time AS idle_time
-              , lag.context_device_model as context_device_model
               , ROW_NUMBER() OVER(PARTITION BY lag.user_id ORDER BY lag.e_tstamp) AS sessionidx
               , COALESCE(LEAD(lag.e_tstamp) OVER (PARTITION BY lag.user_id ORDER BY lag.e_tstamp)
               , '3000-01-01') AS next_session_start
             FROM (SELECT e.event_id AS event_id
-                    , e.user_id
+                    , e.user_id AS user_id
                     , e.sent_at AS e_tstamp
-                    , e.context_device_model
                     , DATEDIFF(minutes, LAG(e.sent_at) OVER(PARTITION BY e.user_id ORDER BY e.sent_at), e.sent_at) AS idle_time
-                  FROM hoodie.tracks AS e) AS lag
+                  FROM ${mapped_tracks.SQL_TABLE_NAME} AS e
+                  ) AS lag
             WHERE (lag.idle_time > 30 OR lag.idle_time IS NULL)  
 
   fields:

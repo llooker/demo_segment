@@ -1,5 +1,5 @@
 - dashboard: sessions_dashboard
-  title: Sessions Pulse
+  title: Session Overview
   layout: tile
   tile_size: 100
 

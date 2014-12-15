@@ -23,11 +23,11 @@
     type: single_value
     model: demo_segment
     explore: tracks
-    measures: [tracks.count_users]
+    measures: [aliases_mapping.count_distinct_users]
     listen:
       date: tracks.sent_date
       event: tracks.event
-    sorts: [tracks.count_users desc]
+    sorts: [aliases_mapping.count_distinct_users desc]
     limit: 500
     font_size: medium
     width: 4
@@ -183,7 +183,7 @@
     model: demo_segment
     explore: tracks
     dimensions: [user_track_facts.days_tracked_on_site_tiered]
-    measures: [tracks.count_users]
+    measures: [aliases_mapping.count_distinct_users]
     listen:
       date: tracks.sent_date
       event: tracks.event
@@ -209,7 +209,7 @@
     explore: tracks
     dimensions: [tracks.is_new_user, tracks.sent_date]
     pivots: [tracks.is_new_user]
-    measures: [tracks.count_users]
+    measures: [aliases_mapping.count_distinct_users]
     listen:
       date: tracks.sent_date
       event: tracks.event

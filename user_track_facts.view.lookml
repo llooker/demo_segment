@@ -1,13 +1,14 @@
+- explore: user_track_facts
 - view: user_track_facts
   derived_table:
     sql: |
       SELECT 
-        tracks.user_id as user_id                               
-        , MIN(DATE(tracks.sent_at)) as first_date              
-        , MAX(DATE(tracks.sent_at)) as last_date                
+        user_id as user_id                               
+        , MIN(DATE(sent_at)) as first_date              
+        , MAX(DATE(sent_at)) as last_date                
         , COUNT(*) as number_of_events                          
-        , COUNT(DISTINCT DATE(tracks.sent_at)) as days_on_site  
-      FROM hoodie.tracks AS tracks
+        , COUNT(DISTINCT DATE(sent_at)) as days_on_site  
+      FROM ${mapped_tracks.SQL_TABLE_NAME} AS tracks
       GROUP BY 1
 
   fields:

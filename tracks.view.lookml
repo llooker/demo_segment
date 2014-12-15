@@ -83,8 +83,9 @@
     sql: FLOOR(DATEDIFF(day,${user_track_facts.first_track_date}, ${sent_date})/7)
   
   - dimension: user_id
+    hidden: true
     sql: ${TABLE}.user_id
-  
+
   - dimension: is_new_user
     sql:  |
         CASE 
@@ -94,7 +95,3 @@
   - measure: count
     type: count
     drill_fields: [context_library_name, context_os_name]
-  
-  - measure: count_users
-    type: count_distinct
-    sql: ${user_id}
