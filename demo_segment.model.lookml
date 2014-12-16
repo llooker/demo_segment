@@ -9,9 +9,13 @@
 - explore: identifies
 
 - explore: pages
+  always_join: [aliases_mapping]
   joins: 
+    - join: aliases_mapping
+      sql_on: aliases_mapping.previous_id = coalesce(pages.user_id, pages.anonymous_id)
+    
     - join: user_page_facts
-      foreign_key: user_id
+      sql_on: user_page_facts.user_id = coalesce(aliases_mapping.mapped_user_id,pages.user_id,pages.anonymous_id)
     
     - join: page_facts
       foreign_key: event_id

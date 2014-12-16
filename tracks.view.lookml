@@ -85,6 +85,16 @@
   - dimension: user_id
     hidden: true
     sql: ${TABLE}.user_id
+  
+  - dimension: mapped_user_id
+    label: "TRACKS User Id"
+    sql: coalesce(${aliases_mapping.mapped_user_id},${user_id},${anonymous_id})
+  
+  - measure: count_distinct_users
+    label: "TRACKS User Count"
+    type: count_distinct
+    sql: ${mapped_user_id}
+
 
   - dimension: is_new_user
     sql:  |

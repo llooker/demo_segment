@@ -3,7 +3,7 @@
   derived_table:
     sql: |
       SELECT 
-        user_id as user_id                               
+        user_id                        
         , MIN(DATE(sent_at)) as first_date              
         , MAX(DATE(sent_at)) as last_date                
         , COUNT(*) as number_of_events                          

@@ -41,15 +41,6 @@
     hidden: true
     sql: ${TABLE}.mapped_user_id
   
-  - dimension: user_id
-    label: "TRACKS User Id"
-    sql: coalesce(${mapped_user_id},${tracks.user_id},${tracks.anonymous_id})
-  
-  - measure: count_distinct_users
-    label: "TRACKS User Count"
-    type: count_distinct
-    sql: ${user_id}
-
   sets:
     detail:
       - previous_id

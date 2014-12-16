@@ -9,7 +9,6 @@
                 WHEN DATEDIFF(seconds, e.sent_at, LEAD(e.sent_at) OVER(PARTITION BY e.user_id ORDER BY e.sent_at)) > 30*60 THEN NULL 
                 ELSE DATEDIFF(seconds, e.sent_at, LEAD(e.sent_at) OVER(PARTITION BY e.user_id ORDER BY e.sent_at)) END AS lead_idle_time_condition
       FROM hoodie.pages AS e
-      WHERE user_id is not null
       order by e.sent_at
 
   fields:
