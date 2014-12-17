@@ -1,4 +1,3 @@
-
 - view: mapped_tracks  # Tracks mapped to user id
   derived_table:
     sql_trigger_value: SELECT CURRENT_DATE
@@ -6,11 +5,12 @@
     sortkeys: [event_id]  
     sql:  |
           SELECT event_id 
+                 , event
                  , coalesce(e2.mapped_user_id, e1.user_id, e1.anonymous_id) as user_id
                  , sent_at
           FROM hoodie.tracks AS e1
           LEFT JOIN ${aliases_mapping.SQL_TABLE_NAME} AS e2
-          ON coalesce(e1.user_id, e1.anonymous_id) = e2.previous_id  
+          ON coalesce(e1.user_id, e1.anonymous_id) = e2.previous_id 
 
 
 - view: sessions  # Creates sessions by mapped user_id with 30 minute idle timeout window
@@ -84,12 +84,31 @@
   - dimension: sessionidx
     type: number
     sql: ${TABLE}.sessionidx
-
+  
+  - dimension: session_duration_minutes
+    type: number
+    sql: DATEDIFF(minutes, ${start_time}::timestamp, ${session_facts.ended_at_time}::timestamp)
+  
   - dimension_group: next_session_start
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.next_session_start
 
+  - dimension: is_bounced
+    sql: CASE 
+            WHEN ${session_facts.number_events} = 1 THEN 'Bounced Session'
+            ELSE 'Not Bounced' END
+  
+  - dimension: number_events_tiered
+    type: tier
+    sql: ${session_facts.number_events}
+    tiers: [1,5,10,20,30,60]
+  
+  - dimension: session_duration_minutes_tiered
+    type: tier
+    sql: ${session_duration_minutes}
+    tiers: [1,5,10,20,30,60]
+  
   - measure: count
     type: count
     drill_fields: detail*
@@ -102,6 +121,20 @@
     type: number
     decimals: 2
     sql: 1.00 * ${count} / NULLIF(${count_users}, 0)
+  
+  - measure: avg_session_duration_minutes
+    type: average
+    sql: ${session_duration_minutes}
+  
+  - measure: avg_events_per_session
+    type: average
+    sql: ${session_facts.number_events}
+  
+  - measure: bounced_session_count
+    type: count
+    filters:
+      is_bounced: yes
+      
    
   
   sets:

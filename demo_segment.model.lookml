@@ -28,6 +28,9 @@
     
     - join: user_track_facts
       sql_on: user_track_facts.user_id = coalesce(aliases_mapping.mapped_user_id,tracks.user_id,tracks.anonymous_id)
+    
+    - join: users
+      sql_on: coalesce(users.mapped_user_id, users.user_id) = coalesce(aliases_mapping.mapped_user_id,tracks.user_id,tracks.anonymous_id)
 
 - explore: sessions
   joins: 
@@ -43,3 +46,8 @@
         AND
         sessions.sessionidx = session_facts.sessionidx
       join_type: one_to_one
+    
+    - join: users
+      sql_on: coalesce(users.mapped_user_id, users.user_id) = sessions.user_id
+
+

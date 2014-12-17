@@ -55,10 +55,10 @@
     type: single_value
     model: demo_segment
     explore: sessions
-    measures: [session_facts.avg_session_duration_minutes]
+    measures: [sessions.avg_session_duration_minutes]
     listen: 
       date: sessions.start_date
-    sorts: [session_facts.avg_session_duration_minutes desc]
+    sorts: [sessions.avg_session_duration_minutes desc]
     limit: 500
     show_null_points: true
     show_value_labels: false
@@ -73,10 +73,10 @@
     type: single_value
     model: demo_segment
     explore: sessions
-    measures: [session_facts.avg_events_per_session]
+    measures: [sessions.avg_events_per_session]
     listen: 
       date: sessions.start_date
-    sorts: [session_facts.avg_events_per_session desc]
+    sorts: [sessions.avg_events_per_session desc]
     limit: 500
     show_null_points: true
     show_value_labels: false
@@ -135,8 +135,8 @@
     type: looker_line
     model: demo_segment
     explore: sessions
-    dimensions: [session_facts.is_bounced, sessions.start_date]
-    pivots: [session_facts.is_bounced]
+    dimensions: [sessions.is_bounced, sessions.start_date]
+    pivots: [sessions.is_bounced]
     measures: [sessions.count]
     listen: 
       date: sessions.start_date
@@ -163,7 +163,7 @@
     type: looker_pie
     model: demo_segment
     explore: sessions
-    dimensions: [session_facts.is_bounced]
+    dimensions: [sessions.is_bounced]
     measures: [sessions.count]
     listen: 
       date: sessions.start_date
@@ -201,11 +201,11 @@
     type: looker_column
     model: demo_segment
     explore: sessions
-    dimensions: [session_facts.number_events_tiered]
+    dimensions: [sessions.number_events_tiered]
     measures: [sessions.count]
     listen: 
       date: sessions.start_date
-    sorts: [session_facts.number_events_tiered]
+    sorts: [sessions.number_events_tiered]
     limit: 6
     stacking: ''
     show_value_labels: false

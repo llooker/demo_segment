@@ -1,8 +1,10 @@
+- explore: tracks_sessions_map
 - view: tracks_sessions_map # Determines event sequence numbers within session
 
   derived_table:
     sql: |
       select pv.event_id
+        , pv.event
         , s.user_id
         , s.sessionidx
         , row_number() over(partition by s.user_id, s.sessionidx order by pv.sent_at) as sess_pv_seq_num
@@ -24,7 +26,10 @@
 
   - dimension: event_id
     sql: ${TABLE}.event_id
-
+  
+  - dimension: event
+    sql: ${TABLE}.event
+  
   - dimension: user_id
     sql: ${TABLE}.user_id
 
