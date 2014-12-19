@@ -19,8 +19,10 @@
       ON a.user_id = b.user_id
       WHERE b.user_id is null
       AND a.user_id is not null
-      AND a.anonymous_id is not null UNION
-      SELECT DISTINCT a.anonymous_id, a.user_id
+      AND a.anonymous_id is not null 
+      UNION
+      SELECT DISTINCT a.anonymous_id as previous_id
+                    , a.user_id as user_id
       FROM hoodie.tracks AS a
       LEFT JOIN hoodie.aliases AS b
       ON a.user_id = b.user_id

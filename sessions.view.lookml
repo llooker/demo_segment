@@ -56,7 +56,8 @@
   - dimension: days_since_first_session
     type: number
     sql: ${start_date} - ${user_session_facts.first_date}
-  
+    required_joins: [user_session_facts]
+    
   - dimension: weeks_since_first_session
     type: int
     sql: FLOOR(${days_since_first_session}/7)
