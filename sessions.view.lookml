@@ -113,6 +113,26 @@
     type: count
     drill_fields: detail*
   
+  - measure: count_view_buy_page
+    type: count
+    filter: 
+      session_facts.view_buy_page: yes
+  
+  - measure: count_added_item
+    type: count
+    filter: 
+      session_facts.added_item: yes
+  
+  - measure: count_tapped_shipit
+    type: count
+    filter: 
+      session_facts.tapped_shipit: yes
+  
+  - measure: count_made_purchase
+    type: count
+    filter: 
+      session_facts.made_purchase: yes
+  
   - measure: count_users
     type: count_distinct
     sql: ${user_id}

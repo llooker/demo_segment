@@ -173,6 +173,32 @@
     width: 4
     colors: ['#7f889b',orange]
 
+  - name: add_a_unique_name_548
+    title: Session Conversion Funnel
+    type: looker_column
+    model: demo_segment
+    explore: sessions
+    measures: [sessions.count_view_buy_page, sessions.count_added_item, sessions.count_tapped_shipit,
+      sessions.count_made_purchase]
+    sorts: [sessions.count_view_buy_page desc]
+    listen: 
+      date: sessions.start_date
+    limit: 500
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_combined: true
+    show_dropoff: true
+    show_value_labels: false
+    show_view_names: false
+    show_null_labels: false
+    x_axis_gridlines: false
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    stacking: ''
+    x_axis_scale: auto
+    width: 12
+    
   - name: add_a_unique_name_78
     title: Sessions per User Distribution
     type: looker_column
@@ -218,4 +244,4 @@
     show_x_axis_ticks: true
     x_axis_scale: auto
     show_null_labels: false
-    colors: ['#a9c574']
+    colors: [orange]

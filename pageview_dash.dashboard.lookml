@@ -1,5 +1,5 @@
 - dashboard: pageview_dash
-  title: Pages Dashboard
+  title: Pageview Summary
   layout: tile
   tile_size: 100
 

@@ -1,5 +1,5 @@
 - dashboard: segment_dashboard
-  title: Tracking Pulse
+  title: Tracks Overview
   layout: tile
   tile_size: 100
 

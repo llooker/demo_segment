@@ -1,4 +1,3 @@
-- explore: users
 - view: users
   derived_table:
     sql: |

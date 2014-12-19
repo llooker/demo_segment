@@ -1,4 +1,3 @@
-- explore: user_track_facts
 - view: user_track_facts
   derived_table:
     sql: |
