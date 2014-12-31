@@ -105,3 +105,54 @@
   - measure: count
     type: count
     drill_fields: [context_library_name, context_os_name]
+    
+    
+
+## Session count funnel meausures
+  - filter: event1
+    suggest_dimension: ${event}
+
+  - measure: event1_session_count
+    type: number
+    sql: | 
+      COUNT(
+        DISTINCT(
+          CASE 
+            WHEN 
+            {% condition event1 %} ${event} {% endcondition %} 
+              THEN ${session_id}
+            ELSE NULL END 
+        )
+      )
+
+  - filter: event2
+    suggest_dimension: ${event}
+
+  - measure: event2_session_count
+    type: number
+    sql: | 
+      COUNT(
+        DISTINCT(
+          CASE 
+            WHEN 
+            {% condition event2 %} ${event} {% endcondition %} 
+              THEN ${session_id}
+            ELSE NULL END 
+        )
+      )
+      
+  - filter: event3
+    suggest_dimension: ${event}
+
+  - measure: event3_session_count
+    type: number
+    sql: | 
+      COUNT(
+        DISTINCT(
+          CASE 
+            WHEN 
+            {% condition event3 %} ${event} {% endcondition %} 
+              THEN ${session_id}
+            ELSE NULL END 
+        )
+      )
