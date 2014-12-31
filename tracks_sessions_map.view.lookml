@@ -24,6 +24,7 @@
     drill_fields: detail*
 
   - dimension: event_id
+    primary_key: true
     sql: ${TABLE}.event_id
   
   - dimension: event

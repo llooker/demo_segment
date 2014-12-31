@@ -28,6 +28,11 @@
     
     - join: users
       sql_on: coalesce(users.mapped_user_id, users.user_id) = coalesce(aliases_mapping.mapped_user_id,tracks.user_id,tracks.anonymous_id)
+    
+    - join: tracks_sessions_map
+      foreign_key: event_id
+      join_type: one_to_one
+
 
 - explore: sessions
   joins: 
