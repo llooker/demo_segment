@@ -106,16 +106,15 @@
     type: count
     drill_fields: [context_library_name, context_os_name]
   
+  - measure: count_percent_of_total
+    type: percent_of_total
+    sql: ${count}
+    decimals: 1
   
     
 
 ## Session count funnel meausures
   
-  # Generate a session_id dimension, so we can count-distinct it
-  - dimension: session_id
-    sql: | 
-      ${tracks_sessions_map.user_id} || '_sessionidx_' || ${tracks_sessions_map.sessionidx}
-
   - filter: event1
     suggest_dimension: ${event}
 
@@ -127,7 +126,7 @@
           CASE 
             WHEN 
             {% condition event1 %} ${event} {% endcondition %} 
-              THEN ${session_id}
+              THEN ${tracks_sessions_map.session_id}
             ELSE NULL END 
         )
       )
@@ -143,7 +142,7 @@
           CASE 
             WHEN 
             {% condition event2 %} ${event} {% endcondition %} 
-              THEN ${session_id}
+              THEN ${tracks_sessions_map.session_id}
             ELSE NULL END 
         )
       )
@@ -159,7 +158,7 @@
           CASE 
             WHEN 
             {% condition event3 %} ${event} {% endcondition %} 
-              THEN ${session_id}
+              THEN ${tracks_sessions_map.session_id}
             ELSE NULL END 
         )
       )
@@ -175,7 +174,7 @@
           CASE 
             WHEN 
             {% condition event4 %} ${event} {% endcondition %} 
-              THEN ${session_id}
+              THEN ${tracks_sessions_map.session_id}
             ELSE NULL END 
         )
       )

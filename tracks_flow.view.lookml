@@ -1,0 +1,107 @@
+- view: tracks_flow
+  derived_table:
+    sql: |
+      select a.event_id
+            , a.session_id
+            , a.sess_pv_seq_num
+            , a.event
+            , a.user_id
+            , b.event as event_2
+            , c.event as event_3
+            , d.event as event_4
+            , e.event as event_5
+      from ${tracks_sessions_map.SQL_TABLE_NAME} a
+      left join ${tracks_sessions_map.SQL_TABLE_NAME} b
+      on a.sess_pv_seq_num + 1 = b.sess_pv_seq_num
+      and a.session_id = b.session_id
+      left join ${tracks_sessions_map.SQL_TABLE_NAME} c
+      on a.sess_pv_seq_num + 2 = c.sess_pv_seq_num
+      and a.session_id = c.session_id
+      left join ${tracks_sessions_map.SQL_TABLE_NAME} d
+      on a.sess_pv_seq_num + 3 = d.sess_pv_seq_num
+      and a.session_id = d.session_id
+      left join ${tracks_sessions_map.SQL_TABLE_NAME} e
+      on a.sess_pv_seq_num + 4 = e.sess_pv_seq_num
+      and a.session_id = e.session_id
+      order by a.session_id, a.sess_pv_seq_num
+    
+    sql_trigger_value: select count(*) from ${sessions.SQL_TABLE_NAME}
+    sortkeys: [event_id, user_id, session_id]
+    distkey: user_id
+
+  fields:
+
+  - dimension: event_id
+    primary_key: true
+    sql: ${TABLE}.event_id
+    hidden: true
+
+  - dimension: session_id
+    hidden: true
+    sql: ${TABLE}.session_id
+
+  - dimension: sess_pv_seq_num
+    type: number
+    hidden: true
+    sql: ${TABLE}.sess_pv_seq_num
+
+  - dimension: event
+    hidden: true
+    sql: ${TABLE}.event
+
+  - dimension: user_id
+    hidden: true
+    sql: ${TABLE}.user_id
+
+  - dimension: event_2
+    label: '2nd Event'
+    sql: ${TABLE}.event_2
+  
+  - measure: event_2_drop_off
+    label: '2nd Event Remaining Count'
+    type: count
+    filter: 
+      event_2: -NULL
+    
+  - dimension: event_3
+    label: '3rd Event'
+    sql: ${TABLE}.event_3
+  
+  - measure: event_3_drop_off
+    label: '3rd Event Remaining Count'
+    type: count
+    filter: 
+      event_3: -NULL
+
+  - dimension: event_4
+    label: '4th Event'
+    sql: ${TABLE}.event_4
+  
+  - measure: event_4_drop_off
+    label: '4th Event Remaining Count'
+    type: count
+    filter: 
+      event_4: -NULL
+
+  - dimension: event_5
+    label: '5th Event'
+    sql: ${TABLE}.event_5
+  
+  - measure: event_5_drop_off
+    label: '5th Event Remaining Count'
+    type: count
+    filter: 
+      event_5: -NULL
+  
+  sets:
+    detail:
+      - event_id
+      - session_id
+      - sess_pv_seq_num
+      - event
+      - user_id
+      - event_2
+      - event_3
+      - event_4
+      - event_5
+

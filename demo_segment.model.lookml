@@ -32,6 +32,11 @@
     - join: tracks_sessions_map
       foreign_key: event_id
       join_type: one_to_one
+    
+    - join: tracks_flow
+      foreign_key: event_id
+      join_type: one_to_one
+    
 
 
 - explore: sessions
@@ -43,11 +48,8 @@
       foreign_key: user_id
     
     - join: session_facts
-      sql_on: |
-        sessions.user_id = session_facts.user_id
-        AND
-        sessions.sessionidx = session_facts.sessionidx
       join_type: one_to_one
+      foreign_key: session_id
     
     - join: users
       sql_on: coalesce(users.mapped_user_id, users.user_id) = sessions.user_id

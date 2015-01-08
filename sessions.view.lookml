@@ -16,10 +16,10 @@
 - view: sessions  # Creates sessions by mapped user_id with 30 minute idle timeout window
   derived_table:
     sql_trigger_value: SELECT CURRENT_DATE
-    distkey: start_event_id
-    sortkeys: [start_event_id]
+    distkey: session_id
+    sortkeys: [session_id]
     sql: |
-            SELECT lag.event_id AS start_event_id 
+            SELECT lag.event_id AS session_id 
               , lag.user_id
               , lag.e_tstamp AS session_start
               , lag.idle_time AS idle_time
@@ -36,8 +36,9 @@
 
   fields:
 
-  - dimension: start_event_id
-    sql: ${TABLE}.start_event_id
+  - dimension: session_id
+    primary_key: true
+    sql: ${TABLE}.session_id
 
   - dimension: user_id
     sql: ${TABLE}.user_id
