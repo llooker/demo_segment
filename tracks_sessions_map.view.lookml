@@ -38,7 +38,6 @@
     sql: ${TABLE}.user_id
 
   - dimension: session_id
-    hidden: true
     type: number
     sql: ${TABLE}.session_id
 
