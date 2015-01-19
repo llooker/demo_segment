@@ -37,6 +37,9 @@
       foreign_key: event_id
       join_type: one_to_one
     
+    - join: sessions
+      foreign_key: session_id
+      join_type: one_to_many
 
 
 - explore: sessions
