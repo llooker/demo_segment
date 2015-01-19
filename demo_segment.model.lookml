@@ -38,8 +38,8 @@
       join_type: one_to_one
     
     - join: sessions
-      foreign_key: session_id
-      join_type: one_to_many
+      foreign_key: tracks_sessions_map.session_id
+      join_type: many_to_one
 
 
 - explore: sessions
