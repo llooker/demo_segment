@@ -41,6 +41,10 @@
       foreign_key: tracks_sessions_map.session_id
       join_type: many_to_one
 
+    - join: session_facts
+      join_type: one_to_one
+      foreign_key: sessions.session_id
+
 
 - explore: sessions
   joins: 
