@@ -6,7 +6,7 @@
         , pv.event
         , s.user_id
         , s.session_id
-        , row_number() over(partition by s.user_id, s.sessionidx order by pv.sent_at) as sess_pv_seq_num
+        , row_number() over(partition by s.session_id order by pv.sent_at) as sess_pv_seq_num
       from ${mapped_tracks.SQL_TABLE_NAME} pv
       inner join ${sessions.SQL_TABLE_NAME}  as  s
         on pv.user_id = s.user_id
