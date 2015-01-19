@@ -45,6 +45,10 @@
       join_type: one_to_one
       foreign_key: sessions.session_id
 
+    - join: user_session_facts
+      foreign_key: sessions.user_id
+      join_type: one_to_one
+
 
 - explore: sessions
   joins: 
