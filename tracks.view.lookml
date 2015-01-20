@@ -97,7 +97,7 @@
 
 
   - dimension: is_new_user
-    suggest_base_view: event_list
+    suggest_explore: event_list
     suggest_dimension: event_types
     sql:  |
         CASE 
@@ -118,7 +118,7 @@
 ## Session count funnel meausures
   
   - filter: event1
-    suggest_base_view: event_list
+    suggest_explore: event_list
     suggest_dimension: event_types
 
   - measure: event1_session_count
