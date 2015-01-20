@@ -117,7 +117,7 @@
   
   - filter: event1
     suggest_explore: event_list
-    suggest_dimension: ${event_list.event_types}
+    suggest_dimension: event_list.event_types
 
   - measure: event1_session_count
     type: number
@@ -134,7 +134,7 @@
 
   - filter: event2
     suggest_explore: event_list
-    suggest_dimension: ${event_list.event_types}
+    suggest_dimension: event_list.event_types
 
   - measure: event2_session_count
     type: number
@@ -151,7 +151,7 @@
       
   - filter: event3
     suggest_explore: event_list
-    suggest_dimension: ${event_list.event_types}
+    suggest_dimension: event_list.event_types
 
   - measure: event3_session_count
     type: number
@@ -168,7 +168,7 @@
       
   - filter: event4
     suggest_explore: event_list
-    suggest_dimension: ${event_list.event_types}
+    suggest_dimension: event_list.event_types
 
   - measure: event4_session_count
     type: number
