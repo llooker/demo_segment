@@ -12,7 +12,9 @@
       WHERE a1.previous_id <> a1.user_id UNION
       SELECT DISTINCT anonymous_id as previous_id
           , user_id 
-      FROM hoodie.aliases UNION
+      FROM hoodie.aliases
+      WHERE anonymous_id <> user_id 
+      UNION
       SELECT distinct a.anonymous_id, a.user_id 
       FROM hoodie.tracks as a
       LEFT JOIN hoodie.aliases as b
@@ -20,6 +22,7 @@
       WHERE b.user_id is null
       AND a.user_id is not null
       AND a.anonymous_id is not null 
+      AND a.anonymous_id <> a.user_id 
       )
       
       SELECT DISTINCT a1.previous_id
