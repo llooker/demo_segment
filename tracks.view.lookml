@@ -98,7 +98,7 @@
 
   - dimension: is_new_user
     suggest_base_view: event_list
-    suggest_dimension: event_list.event_types
+    suggest_dimension: event_types
     sql:  |
         CASE 
         WHEN ${sent_date} = ${user_track_facts.first_track_date} THEN 'New User'
@@ -119,7 +119,7 @@
   
   - filter: event1
     suggest_base_view: event_list
-    suggest_dimension: event_list.event_types
+    suggest_dimension: event_types
 
   - measure: event1_session_count
     type: number
