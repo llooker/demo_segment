@@ -9,3 +9,4 @@
         DISTINCT(event) as event_types
       FROM hoodie.tracks
       GROUP BY 1
+      ORDER BY 1
