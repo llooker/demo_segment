@@ -4,8 +4,6 @@
 - include: "*.view.lookml"       # include all the views
 - include: "*.dashboard.lookml"  # include all the dashboards
 
-- explore: event_list
-
 - explore: pages
   always_join: [aliases_mapping]
   joins: 
@@ -50,7 +48,6 @@
       foreign_key: sessions.user_id
       join_type: one_to_one
 
-
 - explore: sessions
   joins: 
     - join: user_track_facts
@@ -66,4 +63,5 @@
     - join: users
       sql_on: coalesce(users.mapped_user_id, users.user_id) = sessions.user_id
 
-
+- explore: event_list
+  hidden: true
