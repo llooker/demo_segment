@@ -65,3 +65,22 @@
 
 - explore: event_list
   hidden: true
+
+- explore: funnel_explorer
+  joins:
+    - join: sessions
+      foreign_key: session_id
+      
+    - join: user_track_facts
+      foreign_key: sessions.user_id
+    
+    - join: user_session_facts
+      foreign_key: sessions.user_id
+    
+    - join: session_facts
+      join_type: one_to_one
+      foreign_key: session_id
+    
+    - join: users
+      sql_on: coalesce(users.mapped_user_id, users.user_id) = sessions.user_id
+
