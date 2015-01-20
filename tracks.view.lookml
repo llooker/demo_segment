@@ -116,8 +116,14 @@
 ## Session count funnel meausures
   
   - filter: event1
-    suggest_explore: event_list
-    suggest_dimension: event_types
+    suggestions: [added_item, app_became_active, app_entered_background, 
+                  app_entered_foreground, app_launched, app_resigned_active,
+                  asked_for_sizes, completed_order, failed_auth_validation, logged_in,
+                  made_purchase, payment_available, payment_failed, payment_form_shown,
+                  payment_form_submitted, removed_item, saved_sizes, shipping_available,
+                  shipping_form_failed, shipping_form_shown, shipping_form_submitted,
+                  signed_up, submitted_order, switched_auth_forms, tapped_shipit,
+                  view_buy_page, viewed_auth_page]
 
   - measure: event1_session_count
     type: number
@@ -133,8 +139,14 @@
       )
 
   - filter: event2
-    suggest_base_view: event_list
-    suggest_dimension: event_types
+    suggestions: [added_item, app_became_active, app_entered_background, 
+                  app_entered_foreground, app_launched, app_resigned_active,
+                  asked_for_sizes, completed_order, failed_auth_validation, logged_in,
+                  made_purchase, payment_available, payment_failed, payment_form_shown,
+                  payment_form_submitted, removed_item, saved_sizes, shipping_available,
+                  shipping_form_failed, shipping_form_shown, shipping_form_submitted,
+                  signed_up, submitted_order, switched_auth_forms, tapped_shipit,
+                  view_buy_page, viewed_auth_page]
 
   - measure: event2_session_count
     type: number
@@ -150,8 +162,14 @@
       )
       
   - filter: event3
-    suggest_base_view: event_list
-    suggest_dimension: event_types
+    suggestions: [added_item, app_became_active, app_entered_background, 
+                  app_entered_foreground, app_launched, app_resigned_active,
+                  asked_for_sizes, completed_order, failed_auth_validation, logged_in,
+                  made_purchase, payment_available, payment_failed, payment_form_shown,
+                  payment_form_submitted, removed_item, saved_sizes, shipping_available,
+                  shipping_form_failed, shipping_form_shown, shipping_form_submitted,
+                  signed_up, submitted_order, switched_auth_forms, tapped_shipit,
+                  view_buy_page, viewed_auth_page]
 
   - measure: event3_session_count
     type: number
@@ -167,8 +185,14 @@
       )
       
   - filter: event4
-    suggest_base_view: event_list
-    suggest_dimension: event_types
+    suggestions: [added_item, app_became_active, app_entered_background, 
+                  app_entered_foreground, app_launched, app_resigned_active,
+                  asked_for_sizes, completed_order, failed_auth_validation, logged_in,
+                  made_purchase, payment_available, payment_failed, payment_form_shown,
+                  payment_form_submitted, removed_item, saved_sizes, shipping_available,
+                  shipping_form_failed, shipping_form_shown, shipping_form_submitted,
+                  signed_up, submitted_order, switched_auth_forms, tapped_shipit,
+                  view_buy_page, viewed_auth_page]
 
   - measure: event4_session_count
     type: number
