@@ -97,6 +97,8 @@
 
 
   - dimension: is_new_user
+    suggest_base_view: event_list
+    suggest_dimension: event_list.event_types
     sql:  |
         CASE 
         WHEN ${sent_date} = ${user_track_facts.first_track_date} THEN 'New User'
