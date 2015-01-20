@@ -4,6 +4,8 @@
 - include: "*.view.lookml"       # include all the views
 - include: "*.dashboard.lookml"  # include all the dashboards
 
+- explore: event_list
+  hidden: true
 
 - explore: pages
   always_join: [aliases_mapping]
