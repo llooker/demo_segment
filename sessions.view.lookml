@@ -45,7 +45,7 @@
 
   - dimension_group: start
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, day_of_month]
     sql: ${TABLE}.session_start
 
   - dimension: is_new_user
@@ -161,10 +161,9 @@
   
   sets:
     detail:
-      - start_event_id
+      - session_id
       - user_id
-      - session_start
-      - idle_time
+      - start_date
       - sessionidx
       - next_session_start
 
