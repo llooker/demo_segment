@@ -1,24 +1,26 @@
 - view: user_session_facts
   derived_table:
     sql_trigger_value: SELECT CURRENT_DATE
-    distkey: user_id
-    sortkeys: [user_id]
+    distkey: looker_visitor_id
+    sortkeys: [looker_visitor_id]
     
     sql: |
       SELECT 
-        user_id                               
-        , MIN(DATE(session_start)) as first_date              
-        , MAX(DATE(session_start)) as last_date                
+        looker_visitor_id  
+        , MIN(DATE(s.session_start_at)) as first_date              
+        , MAX(DATE(s.session_start_at)) as last_date
         , COUNT(*) as number_of_sessions                        
-      FROM ${sessions.SQL_TABLE_NAME}
+      FROM ${sessions_trk.SQL_TABLE_NAME} as s
+      LEFT JOIN ${session_trk_facts.SQL_TABLE_NAME} as sf
+      ON s.session_id = sf.session_id
       GROUP BY 1
       
   fields:
 #     Define your dimensions and measures here, like this:
-    - dimension: user_id
+    - dimension: looker_visitor_id
       hidden: true
       primary_key: true
-      sql: ${TABLE}.user_id
+      sql: ${TABLE}.looker_visitor_id
 
     - dimension: number_of_sessions
       type: number
@@ -38,4 +40,3 @@
       type: time
       timeframes: [date, week, month]
       sql: ${TABLE}.last_date
-      

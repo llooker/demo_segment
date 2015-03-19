@@ -80,26 +80,15 @@
   
   - dimension_group: weeks_since_first_visit
     type: number
-    sql: FLOOR(DATEDIFF(day,${user_track_facts.first_track_date}, ${sent_date})/7)
+    sql: FLOOR(DATEDIFF(day,${user_session_facts.first_date}, ${sent_date})/7)
   
   - dimension: user_id
-    hidden: true
     sql: ${TABLE}.user_id
-  
-  - dimension: mapped_user_id
-    label: "TRACKS User Id"
-    sql: coalesce(${aliases_mapping.mapped_user_id},${user_id},${anonymous_id})
-  
-  - measure: count_distinct_users
-    label: "TRACKS User Count"
-    type: count_distinct
-    sql: ${mapped_user_id}
-
 
   - dimension: is_new_user
     sql:  |
         CASE 
-        WHEN ${sent_date} = ${user_track_facts.first_track_date} THEN 'New User'
+        WHEN ${sent_date} = ${user_session_facts.first_date} THEN 'New User'
         ELSE 'Returning User' END
 
   - measure: count
@@ -133,7 +122,7 @@
           CASE 
             WHEN 
             {% condition event1 %} ${event} {% endcondition %} 
-              THEN ${tracks_sessions_map.session_id}
+              THEN ${track_facts.session_id}
             ELSE NULL END 
         )
       )
@@ -156,7 +145,7 @@
           CASE 
             WHEN 
             {% condition event2 %} ${event} {% endcondition %} 
-              THEN ${tracks_sessions_map.session_id}
+              THEN ${track_facts.session_id}
             ELSE NULL END 
         )
       )
@@ -179,7 +168,7 @@
           CASE 
             WHEN 
             {% condition event3 %} ${event} {% endcondition %} 
-              THEN ${tracks_sessions_map.session_id}
+              THEN ${track_facts.session_id}
             ELSE NULL END 
         )
       )
@@ -202,7 +191,7 @@
           CASE 
             WHEN 
             {% condition event4 %} ${event} {% endcondition %} 
-              THEN ${tracks_sessions_map.session_id}
+              THEN ${track_facts.session_id}
             ELSE NULL END 
         )
       )

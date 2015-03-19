@@ -3,31 +3,31 @@
     sql: |
       select a.event_id
             , a.session_id
-            , a.sess_pv_seq_num
+            , a.track_sequence_number
             , a.event
-            , a.user_id
+            , a.looker_visitor_id
             , b.event as event_2
             , c.event as event_3
             , d.event as event_4
             , e.event as event_5
-      from ${tracks_sessions_map.SQL_TABLE_NAME} a
-      left join ${tracks_sessions_map.SQL_TABLE_NAME} b
-      on a.sess_pv_seq_num + 1 = b.sess_pv_seq_num
+      from ${track_facts.SQL_TABLE_NAME} a
+      left join ${track_facts.SQL_TABLE_NAME} b
+      on a.track_sequence_number + 1 = b.track_sequence_number
       and a.session_id = b.session_id
-      left join ${tracks_sessions_map.SQL_TABLE_NAME} c
-      on a.sess_pv_seq_num + 2 = c.sess_pv_seq_num
+      left join ${track_facts.SQL_TABLE_NAME} c
+      on a.track_sequence_number + 2 = c.track_sequence_number
       and a.session_id = c.session_id
-      left join ${tracks_sessions_map.SQL_TABLE_NAME} d
-      on a.sess_pv_seq_num + 3 = d.sess_pv_seq_num
+      left join ${track_facts.SQL_TABLE_NAME} d
+      on a.track_sequence_number + 3 = d.track_sequence_number
       and a.session_id = d.session_id
-      left join ${tracks_sessions_map.SQL_TABLE_NAME} e
-      on a.sess_pv_seq_num + 4 = e.sess_pv_seq_num
+      left join ${track_facts.SQL_TABLE_NAME} e
+      on a.track_sequence_number + 4 = e.track_sequence_number
       and a.session_id = e.session_id
-      order by a.session_id, a.sess_pv_seq_num
+      order by a.session_id, a.track_sequence_number
     
-    sql_trigger_value: select count(*) from ${sessions.SQL_TABLE_NAME}
-    sortkeys: [event_id, user_id, session_id]
-    distkey: user_id
+    sql_trigger_value: select count(*) from ${sessions_trk.SQL_TABLE_NAME}
+    sortkeys: [event_id, looker_visitor_id, session_id]
+    distkey: looker_visitor_id
 
   fields:
 
@@ -40,10 +40,10 @@
     hidden: true
     sql: ${TABLE}.session_id
 
-  - dimension: sess_pv_seq_num
+  - dimension: track_sequence_number
     type: number
     hidden: true
-    sql: ${TABLE}.sess_pv_seq_num
+    sql: ${TABLE}.track_sequence_number
 
   - dimension: event
     hidden: true
@@ -97,7 +97,7 @@
     detail:
       - event_id
       - session_id
-      - sess_pv_seq_num
+      - track_sequence_number
       - event
       - user_id
       - event_2

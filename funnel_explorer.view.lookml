@@ -24,10 +24,10 @@
             ) as event3_time
       FROM hoodie.tracks as tracks
       LEFT JOIN ${aliases_mapping.SQL_TABLE_NAME} as aliases_mapping
-        ON aliases_mapping.previous_id = coalesce(tracks.user_id, tracks.anonymous_id)
-      LEFT JOIN ${tracks_sessions_map.SQL_TABLE_NAME} as tracks_sessions_map
+        ON aliases_mapping.alias = coalesce(tracks.user_id, tracks.anonymous_id)
+      LEFT JOIN ${track_facts.SQL_TABLE_NAME} as tracks_sessions_map
         ON tracks.event_id = tracks_sessions_map.event_id      
-      LEFT JOIN ${sessions.SQL_TABLE_NAME} as sessions
+      LEFT JOIN ${sessions_trk.SQL_TABLE_NAME} as sessions
         ON tracks_sessions_map.session_id = sessions.session_id
       GROUP BY 1
 

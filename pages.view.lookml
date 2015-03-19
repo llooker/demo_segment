@@ -50,18 +50,13 @@
     hidden: true
     sql: ${TABLE}.user_id
   
-  - dimension: mapped_user_id
-    label: "PAGES User Id"
-    sql: coalesce(${aliases_mapping.mapped_user_id},${user_id},${anonymous_id})
+  - measure: count_visitors
+    type: count_distinct 
+    sql: ${aliases_mapping.looker_visitor_id}
 
   - measure: count_pageviews
     type: count
     drill_fields: [context_library_name]
-  
-  - measure: count_users
-    label: "PAGES User Count"
-    type: count_distinct
-    sql: ${mapped_user_id}
 
   - measure: avg_page_view_duration_minutes
     type: average

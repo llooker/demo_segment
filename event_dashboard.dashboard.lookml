@@ -8,7 +8,7 @@
   - name: date
     title: "Date"
     type: date_filter
-    default_value: last 60 days
+    default_value: 2014
   
   - name: event
     title: Event Type
@@ -23,11 +23,11 @@
     type: single_value
     model: demo_segment
     explore: tracks
-    measures: [tracks.count_distinct_users]
+    measures: [track_facts.count_visitors]
     listen:
       date: tracks.sent_date
       event: tracks.event
-    sorts: [tracks.count_distinct_users desc]
+    sorts: [track_facts.count_visitors desc]
     limit: 500
     font_size: medium
     width: 4
@@ -176,59 +176,6 @@
     show_y_axis_ticks: true
     x_axis_scale: auto
     show_null_labels: false
-
-  - name: add_a_unique_name_416
-    title: Distribution of Users Days Spent on Site
-    type: looker_column
-    model: demo_segment
-    explore: tracks
-    dimensions: [user_track_facts.days_tracked_on_site_tiered]
-    measures: [tracks.count_distinct_users]
-    listen:
-      date: tracks.sent_date
-      event: tracks.event
-    sorts: [user_track_facts.days_tracked_on_site_tiered]
-    limit: 14
-    show_null_points: true
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_gridlines: false
-    x_axis_scale: auto
-    show_value_labels: false
-    show_view_names: true
-    stacking: normal
-    y_axis_gridlines: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    show_null_labels: false
-
-  - name: add_a_unique_name_489
-    title: New vs Returning User Breakdown
-    type: looker_area
-    model: demo_segment
-    explore: tracks
-    dimensions: [tracks.is_new_user, tracks.sent_date]
-    pivots: [tracks.is_new_user]
-    measures: [tracks.count_distinct_users]
-    listen:
-      date: tracks.sent_date
-      event: tracks.event
-    sorts: [tracks.sent_date]
-    limit: 500
-    show_null_points: true
-    stacking: normal
-    show_value_labels: false
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    point_style: none
-    interpolation: linear
-
 
 
 

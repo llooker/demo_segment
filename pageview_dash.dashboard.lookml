@@ -9,7 +9,7 @@
   - name: date
     title: "Date"
     type: date_filter
-    default_value: last 60 days
+    default_value: 2014
 
   elements:
 
@@ -46,8 +46,8 @@
     type: single_value
     model: demo_segment
     explore: pages
-    measures: [pages.count_users]
-    sorts: [pages.count_users desc]
+    measures: [pages.count_visitors]
+    sorts: [pages.count_visitors desc]
     listen: 
       date: pages.sent_date
     limit: 500
@@ -83,6 +83,7 @@
     listen: 
       date: pages.sent_date
     limit: 500
+    colors: ['#446c80', '#00b2d8']
     show_null_points: true
     stacking: ''
     show_value_labels: false
@@ -110,6 +111,7 @@
     listen: 
       date: pages.sent_date
     sorts: [pages.count desc, pages.path]
+    colors: ['#446c80', '#00b2d8']
     limit: 500
   
   - name: add_a_unique_name_466
@@ -119,7 +121,7 @@
     explore: pages
     dimensions: [pages.url]
     measures: [pages.avg_page_view_duration_minutes, pages.count_distinct_pageviews,
-      pages.count_pageviews, pages.count_users]
+      pages.count_pageviews, pages.count_visitors]
     filters:
       pages.avg_page_view_duration_minutes: NOT NULL
     listen: 

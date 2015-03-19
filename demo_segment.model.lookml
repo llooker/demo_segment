@@ -4,83 +4,53 @@
 - include: "*.view.lookml"       # include all the views
 - include: "*.dashboard.lookml"  # include all the dashboards
 
-- explore: pages
-  always_join: [aliases_mapping]
+- explore: sessions_trk
+  label: "Sessions"
   joins: 
-    - join: aliases_mapping
-      sql_on: aliases_mapping.previous_id = coalesce(pages.user_id, pages.anonymous_id)
+    - join: session_trk_facts
+      foreign_key: session_id
+      relationship: one_to_one
     
-    - join: user_page_facts
-      sql_on: user_page_facts.user_id = coalesce(aliases_mapping.mapped_user_id,pages.user_id,pages.anonymous_id)
-    
-    - join: page_facts
-      foreign_key: event_id
+    - join: user_session_facts
+      foreign_key: looker_visitor_id
 
 - explore: tracks
-  always_join: [aliases_mapping]
   joins:
-    - join: aliases_mapping
-      sql_on: aliases_mapping.previous_id = coalesce(tracks.user_id, tracks.anonymous_id)
-    
-    - join: user_track_facts
-      sql_on: user_track_facts.user_id = coalesce(aliases_mapping.mapped_user_id,tracks.user_id,tracks.anonymous_id)
-    
-    - join: users
-      sql_on: coalesce(users.mapped_user_id, users.user_id) = coalesce(aliases_mapping.mapped_user_id,tracks.user_id,tracks.anonymous_id)
-    
-    - join: tracks_sessions_map
+    - join: track_facts
       foreign_key: event_id
-      join_type: one_to_one
+    
+    - join: sessions_trk
+      foreign_key: track_facts.session_id
+    
+    - join: session_trk_facts
+      foreign_key: sessions_trk.session_id
+      relationship: one_to_one
     
     - join: tracks_flow
       foreign_key: event_id
-      join_type: one_to_one
-    
-    - join: sessions
-      foreign_key: tracks_sessions_map.session_id
-      join_type: many_to_one
-
-    - join: session_facts
-      join_type: one_to_one
-      foreign_key: sessions.session_id
-
-    - join: user_session_facts
-      foreign_key: sessions.user_id
-      join_type: one_to_one
-
-- explore: sessions
-  joins: 
-    - join: user_track_facts
-      foreign_key: user_id
     
     - join: user_session_facts
-      foreign_key: user_id
-    
-    - join: session_facts
-      join_type: one_to_one
-      foreign_key: session_id
-    
-    - join: users
-      sql_on: coalesce(users.mapped_user_id, users.user_id) = sessions.user_id
+      foreign_key: track_facts.looker_visitor_id
 
-- explore: event_list
-  hidden: true
+- explore: pages
+  joins:
+  - join: aliases_mapping
+    sql_on: aliases_mapping.alias = coalesce(pages.user_id, pages.anonymous_id)
+  
+  - join: page_facts
+    foreign_key: event_id
 
 - explore: funnel_explorer
   joins:
-    - join: sessions
+    - join: sessions_trk
       foreign_key: session_id
-      
-    - join: user_track_facts
-      foreign_key: sessions.user_id
     
     - join: user_session_facts
-      foreign_key: sessions.user_id
+      foreign_key: sessions_trk.looker_visitor_id
     
-    - join: session_facts
+    - join: session_trk_facts
       join_type: one_to_one
       foreign_key: session_id
     
     - join: users
       sql_on: coalesce(users.mapped_user_id, users.user_id) = sessions.user_id
-

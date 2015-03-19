@@ -1,7 +1,10 @@
 - view: users
   derived_table:
+    sql_trigger_value: SELECT COUNT(1) FROM hoodie.identifies
+    sortkeys: [looker_visitor_id]
+    distkey: looker_visitor_id
     sql: |
-      SELECT distinct a.*, b.mapped_user_id 
+      SELECT distinct a.*, b.looker_visitor_id 
       FROM
         (SELECT distinct user_id
               , last_value(jeans ignore nulls) over (partition by user_id order by sent_at rows between unbounded preceding and unbounded following) as jeans
@@ -11,18 +14,18 @@
               , last_value(shipping_address_state ignore nulls) over (partition by user_id order by sent_at rows between unbounded preceding and unbounded following) as state
               , last_value(shipping_address_zip ignore nulls) over (partition by user_id order by sent_at rows between unbounded preceding and unbounded following) as zip
         FROM hoodie.identifies) as a
-      LEFT JOIN ${aliases_mapping.SQL_TABLE_NAME} as b
-      ON a.user_id  = b.previous_id
+      INNER JOIN ${aliases_mapping.SQL_TABLE_NAME} as b
+      ON b.alias = a.user_id 
       
-
   fields:
 
-  - dimension: mapped_user_id
-    sql: ${TABLE}.mapped_user_id
-    
-  - dimension: user_id
+  - dimension: looker_visitor_id
     primary_key: true
-    sql: ${TABLE}.user_id
+    sql: ${TABLE}.looker_visitor_id
+    
+#   - dimension: user_id
+#     primary_key: true
+#     sql: ${TABLE}.user_id
 
   - dimension: jeans
     sql: ${TABLE}.jeans
