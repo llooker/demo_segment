@@ -1,5 +1,8 @@
 - view: session_trk_facts 
   derived_table:
+    sql_trigger_value: select count(1) from ${track_facts.SQL_TABLE_NAME}
+    sortkeys: [session_id]
+    distkey: session_id
     sql: |
 
       SELECT s.session_id
@@ -14,10 +17,6 @@
       LEFT JOIN ${mapped_tracks.SQL_TABLE_NAME} pv USING(event_id)
       GROUP BY 1
                   
-    sql_trigger_value: select count(1) from ${track_facts.SQL_TABLE_NAME}
-    sortkeys: [session_id]
-    distkey: session_id
-
   fields:
 
   - dimension: session_id
