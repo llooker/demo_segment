@@ -17,8 +17,11 @@
 - explore: tracks
   joins:
     - join: track_facts
-      foreign_key: event_id
-    
+      sql_on: |
+        tracks.event_id = track_facts.event_id and 
+        tracks.sent_at = track_facts.sent_at and
+        tracks.anonymous_id = track_facts.anonymous_id
+      
     - join: sessions_trk
       foreign_key: track_facts.session_id
     

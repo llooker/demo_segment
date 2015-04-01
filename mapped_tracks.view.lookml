@@ -6,6 +6,7 @@
                       , datediff(minutes, lag(sent_at) over(partition by looker_visitor_id order by sent_at), sent_at) as idle_time_minutes
                   from (
                         select t.event_id as event_id
+                          , t.anonymous_id
                           , a2v.looker_visitor_id
                           , t.sent_at
                           , t.event as event
@@ -19,6 +20,9 @@
 
   fields:
 
+  - dimension: anonymous_id
+    sql: ${TABLE}.anonymous_id
+    
   - dimension: event_id
     sql: ${TABLE}.event_id
 
