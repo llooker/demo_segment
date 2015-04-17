@@ -6,15 +6,14 @@
     sql: |
 
       SELECT s.session_id
-        , LEAST(MAX(pv.sent_at) + INTERVAL '30 minutes', min(s.next_session_start_at)) AS ended_at
-        , count(distinct pv.event_id) AS num_pvs
-        , count(case when pv.event = 'view_buy_page' then event_id else null end) as cnt_view_buy_page
-        , count(case when pv.event = 'added_item' then event_id else null end) as cnt_added_item
-        , count(case when pv.event = 'tapped_shipit' then event_id else null end) as cnt_shipit
-        , count(case when pv.event = 'made_purchase' then event_id else null end) as cnt_made_purchase
+        , LEAST(MAX(map.sent_at) + INTERVAL '30 minutes', min(s.next_session_start_at)) AS ended_at
+        , count(distinct map.event_id) AS num_pvs
+        , count(case when map.event = 'view_buy_page' then event_id else null end) as cnt_view_buy_page
+        , count(case when map.event = 'added_item' then event_id else null end) as cnt_added_item
+        , count(case when map.event = 'tapped_shipit' then event_id else null end) as cnt_shipit
+        , count(case when map.event = 'made_purchase' then event_id else null end) as cnt_made_purchase
       FROM ${sessions_trk.SQL_TABLE_NAME} AS s
       LEFT JOIN ${track_facts.SQL_TABLE_NAME} as map USING(session_id)
-      LEFT JOIN ${mapped_tracks.SQL_TABLE_NAME} pv USING(event_id)
       GROUP BY 1
                   
   fields:

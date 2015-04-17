@@ -4,7 +4,7 @@
     sortkeys: [session_id]
     distkey: looker_visitor_id
     sql: |
-        select event_id as session_id
+        select row_number() over(partition by looker_visitor_id order by sent_at) || ' - ' || looker_visitor_id as session_id
               , looker_visitor_id
               , sent_at as session_start_at
               , row_number() over(partition by looker_visitor_id order by sent_at) as session_sequence_number

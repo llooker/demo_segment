@@ -5,7 +5,9 @@
     distkey: looker_visitor_id
     sql: |
       
-        select t.event_id
+        select t.anonymous_id 
+            , t.sent_at
+            , t.event_id
             , t.event
             , s.session_id
             , t.looker_visitor_id

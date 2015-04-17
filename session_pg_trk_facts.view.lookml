@@ -7,40 +7,13 @@
     distkey: session_id
   
     sql: |
-      WITH events AS (
-        select *
-          , datediff(minutes, lag(sent_at) over(partition by looker_visitor_id order by sent_at), sent_at) as idle_time_minutes
-        from (
-                select t.event_id || '-t' as event_id
-                  , a2v.looker_visitor_id
-                  , t.sent_at
-                  , t.event as event
-                  , NULL as referrer
-                  , 'tracks' as event_source
-                from hoodie.tracks as t
-                inner join ${aliases_mapping.SQL_TABLE_NAME} as a2v
-                on a2v.alias = coalesce(t.user_id, t.anonymous_id)
-                union all
-                select t.event_id || '-p' as event_id
-                  , a2v.looker_visitor_id
-                  , t.sent_at
-                  , t.path as event
-                  , t.referrer as referrer
-                  , 'pages' as event_source
-                from hoodie.pages as t
-                inner join ${aliases_mapping.SQL_TABLE_NAME} as a2v
-                on a2v.alias = coalesce(t.user_id, t.anonymous_id)) as e 
-              )
-              
       select s.session_id
         , first_referrer
-        , least(max(t.sent_at) + interval '30 minutes', min(s.next_session_start_at)) as end_at
-        , count(case when t.event_source = 'tracks' then 1 else null end) as tracks_count
+        , least(max(t2s.sent_at) + interval '30 minutes', min(s.next_session_start_at)) as end_at
+        , count(case when t2s.event_source = 'tracks' then 1 else null end) as tracks_count
       from ${sessions_pg_trk.SQL_TABLE_NAME} as s
         inner join ${event_facts.SQL_TABLE_NAME} as t2s
           using(session_id)
-        inner join events as t
-          using(event_id)
       group by 1,2
 
 
@@ -110,15 +83,5 @@
     type: average
     decimals: 1
     sql: ${tracks_count}::float
-  
-  - measure: count_sessions_with_donation
-    type: count
-    filter: 
-      made_donation: yes
-  
-  - measure: percent_sessions_with_donation
-    type: number
-    format: '%.2f%'
-    sql: (${count_sessions_with_donation}::float/NULLIF(${sessions.count},0))*100
-    
+
     
