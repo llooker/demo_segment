@@ -16,6 +16,7 @@
   fields:
 
   - dimension: session_id
+    primary_key: true
     sql: ${TABLE}.session_id
 
   - dimension: looker_visitor_id
