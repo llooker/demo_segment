@@ -23,7 +23,7 @@
   view_label: Events
   joins:
     - join: track_facts
-      view_label: Events
+      view_label: events
       relationship: many_to_one
       sql_on: |
         events.event_id = track_facts.event_id and 
@@ -36,13 +36,13 @@
       foreign_key: track_facts.session_id
     
     - join: session_trk_facts
-      view_label: Sessions
+      view_label: sessions
       foreign_key: sessions.session_id
       relationship: one_to_one
     
     - join: event_flow
       from: tracks_flow
-      view_label: Events_flow
+      view_label: events_flow
       foreign_key: event_id
     
     - join: user_session_facts
@@ -61,7 +61,7 @@
 - explore: funnel_explorer
   joins:
     - join: sessions_trk
-      view_label: Sessions
+      view_label: sessions
       foreign_key: session_id
     
     - join: user_session_facts
@@ -69,7 +69,7 @@
       foreign_key: sessions_trk.looker_visitor_id
     
     - join: session_trk_facts
-      view_label: Sessions
+      view_label: sessions
       relationship: one_to_one
       foreign_key: session_id
     
