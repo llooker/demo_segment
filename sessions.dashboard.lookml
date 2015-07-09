@@ -16,11 +16,11 @@
     title: Total Sessions
     type: single_value
     model: demo_segment
-    explore: sessions
-    measures: [sessions.count]
+    explore: sessions_trk
+    measures: [sessions_trk.count]
     listen:
-      date: sessions.start_date
-    sorts: [sessions.count desc]
+      date: sessions_trk.start_date
+    sorts: [sessions_trk.count desc]
     limit: 500
     width: 3
     height: 2
@@ -29,11 +29,11 @@
     title: Distinct Visitors
     type: single_value
     model: demo_segment
-    explore: sessions
-    measures: [sessions.count_visitors]
+    explore: sessions_trk
+    measures: [sessions_trk.count_visitors]
     listen:
-      date: sessions.start_date
-    sorts: [sessions.count_visitors desc]
+      date: sessions_trk.start_date
+    sorts: [sessions_trk.count_visitors desc]
     limit: 500
     width: 3
     height: 2
@@ -42,11 +42,11 @@
     title: Average Sessions Per User
     type: single_value
     model: demo_segment
-    explore: sessions
-    measures: [sessions.avg_sessions_per_user]
+    explore: sessions_trk
+    measures: [sessions_trk.avg_sessions_per_user]
     listen:
-      date: sessions.start_date
-    sorts: [sessions.avg_sessions_per_user desc]
+      date: sessions_trk.start_date
+    sorts: [sessions_trk.avg_sessions_per_user desc]
     limit: 500
     total: false
     font_size: medium
@@ -57,11 +57,11 @@
     title: Average Session Duration
     type: single_value
     model: demo_segment
-    explore: sessions
-    measures: [sessions.avg_session_duration_minutes]
+    explore: sessions_trk
+    measures: [sessions_trk.avg_session_duration_minutes]
     listen:
-      date: sessions.start_date
-    sorts: [sessions.avg_session_duration_minutes desc]
+      date: sessions_trk.start_date
+    sorts: [sessions_trk.avg_session_duration_minutes desc]
     limit: 500
     total: false
     font_size: medium
@@ -74,14 +74,14 @@
     title: Daily Session Count
     type: looker_area
     model: demo_segment
-    explore: sessions
-    dimensions: [session_trk_facts.is_bounced_session, sessions.start_date]
+    explore: sessions_trk
+    dimensions: [session_trk_facts.is_bounced_session, sessions_trk.start_date]
     pivots: [session_trk_facts.is_bounced_session]
-    measures: [sessions.count]
+    measures: [sessions_trk.count]
     colors: ['#fcd15c', '#485963']
     listen:
-      date: sessions.start_date
-    sorts: [sessions.count desc 0]
+      date: sessions_trk.start_date
+    sorts: [sessions_trk.count desc 0]
     limit: 500
     show_null_points: true
     stacking: normal
@@ -97,13 +97,13 @@
     title: Bounced Session Percentage
     type: looker_pie
     model: demo_segment
-    explore: sessions
+    explore: sessions_trk
     dimensions: [session_trk_facts.is_bounced_session]
-    measures: [sessions.count]
+    measures: [sessions_trk.count]
     colors: ['#fcd15c', '#485963']
     listen:
-      date: sessions.start_date
-    sorts: [sessions.count desc]
+      date: sessions_trk.start_date
+    sorts: [sessions_trk.count desc]
     limit: 500
     show_null_points: true
     stacking: normal
@@ -113,14 +113,14 @@
     title: Daily Sessions by New Users
     type: looker_area
     model: demo_segment
-    explore: sessions
-    dimensions: [sessions.start_date, sessions.is_first_session]
-    pivots: [sessions.is_first_session]
-    measures: [sessions.count]
+    explore: sessions_trk
+    dimensions: [sessions_trk.start_date, sessions_trk.is_first_session]
+    pivots: [sessions_trk.is_first_session]
+    measures: [sessions_trk.count]
     colors: ['#446c80', '#00b2d8']
     listen:
-      date: sessions.start_date
-    sorts: [sessions.start_date desc]
+      date: sessions_trk.start_date
+    sorts: [sessions_trk.start_date desc]
     limit: 500
     show_null_points: true
     stacking: normal
@@ -136,13 +136,13 @@
     title: New User Session Percentage
     type: looker_pie
     model: demo_segment
-    explore: sessions
-    dimensions: [sessions.is_first_session]
-    measures: [sessions.count]
+    explore: sessions_trk
+    dimensions: [sessions_trk.is_first_session]
+    measures: [sessions_trk.count]
     colors: ['#446c80', '#00b2d8']
     listen:
-      date: sessions.start_date
-    sorts: [sessions.count desc]
+      date: sessions_trk.start_date
+    sorts: [sessions_trk.count desc]
     limit: 500
     show_null_points: true
     width: 4
@@ -151,15 +151,15 @@
     title: Cohort - Sessions Layered by First Session Month
     type: looker_area
     model: demo_segment
-    explore: sessions
-    dimensions: [users.first_month, sessions.start_month]
-    pivots: [users.first_month]
-    measures: [sessions.count]
+    explore: sessions_trk
+    dimensions: [user_session_facts.first_month, sessions_trk.start_month]
+    pivots: [user_session_facts.first_month]
+    measures: [sessions_trk.count]
     colors: ['#fcd15c', '#485963','#446c80', '#00b2d8', orange]
     filters:
-      sessions.start_month: 2014/09/01 to 2015/03/01
-      users.first_month: 2014/09/01 to 2015/03/01
-    sorts: [sessions.first_month desc, sessions.start_month]
+      sessions_trk.start_month: 2014/09/01 to 2015/03/01
+      user_sessions_trk_facts.first_month: 2014/09/01 to 2015/03/01
+    sorts: [user_sessions_trk_facts.first_month desc, sessions_trk.start_month]
     limit: 500
     total: false
     show_null_points: true
@@ -182,13 +182,13 @@
     title: Customer Cohorts
     type: table
     model: demo_segment
-    explore: sessions
-    dimensions: [sessions.start_month, users.first_month]
-    pivots: [sessions.start_month]
-    measures: [sessions.count]
+    explore: sessions_trk
+    dimensions: [sessions_trk.start_month, user_session_facts.first_month]
+    pivots: [sessions_trk.start_month]
+    measures: [sessions_trk.count]
     filters:
-      sessions.start_month: 2014/09/01 to 2015/03/01
-      users.first_month: 2014/09/01 to 2015/03/01
+      sessions_trk.start_month: 2014/09/01 to 2015/03/01
+      user_sessions_trk_facts.first_month: 2014/09/01 to 2015/03/01
     sorts: [user_sessions_trk_facts.first_month, sessions_trk.start_month desc, user_session_facts.first_month desc]
     limit: 500
     total: false
@@ -198,11 +198,11 @@
     title: Conversion Funnel
     type: looker_column
     model: demo_segment
-    explore: sessions
+    explore: sessions_trk
     measures: [session_trk_facts.count_view_buy_page, session_trk_facts.count_added_item,
       session_trk_facts.count_tapped_shipit, session_trk_facts.count_made_purchase]
     listen:
-      date: sessions.start_date
+      date: sessions_trk.start_date
     sorts: [session_trk_facts.count_view_buy_page desc]
     limit: 500
     colors: ['#fcd15c', '#485963','#446c80', '#00b2d8', orange]

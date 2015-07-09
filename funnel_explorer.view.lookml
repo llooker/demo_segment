@@ -91,17 +91,17 @@
       sql: ${event2_time} < ${event3_time}
 
     - measure: count_sessions
-      type: count_distinct
+      type: count
       sql: ${session_id}
 
     - measure: count_sessions_event1
-      type: count_distinct
+      type: count
       sql: ${session_id}
       filters: 
         event1_time: NOT NULL
     
     - measure: count_sessions_event12
-      type: count_distinct
+      type: count
       sql: ${session_id}
       filters: 
         event1_time: NOT NULL
@@ -109,7 +109,7 @@
         event1_before_event2: TRUE
 
     - measure: count_sessions_event123  
-      type: count_distinct
+      type: count
       sql: ${session_id}
       filters: 
         event1_time: NOT NULL
