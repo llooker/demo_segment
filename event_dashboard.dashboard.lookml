@@ -22,11 +22,11 @@
     title: Unique Users
     type: single_value
     model: demo_segment
-    explore: tracks
+    explore: events
     measures: [track_facts.count_visitors]
     listen:
-      date: tracks.sent_date
-      event: tracks.event
+      date: events.sent_date
+      event: events.event
     sorts: [track_facts.count_visitors desc]
     limit: 500
     font_size: medium
@@ -37,12 +37,12 @@
     title: Total Tracks
     type: single_value
     model: demo_segment
-    explore: tracks
-    measures: [tracks.count]
+    explore: events
+    measures: [events.count]
     listen:
-      date: tracks.sent_date
-      event: tracks.event
-    sorts: [tracks.count desc]
+      date: events.sent_date
+      event: events.event
+    sorts: [events.count desc]
     limit: 500
     font_size: medium
     width: 4
@@ -56,7 +56,7 @@
     measures: [pages.count_pageviews]
     listen:
       date: pages.sent_date
-      event: tracks.event
+#       event: tracks.event
     sorts: [pages.count_pageviews desc]
     limit: 500
     font_size: medium
@@ -67,12 +67,12 @@
     title: Carrier Breakdown
     type: looker_pie
     model: demo_segment
-    explore: tracks
-    dimensions: [tracks.context_carrier]
-    measures: [tracks.count]
+    explore: events
+    dimensions: [events.context_carrier]
+    measures: [events.count]
     filters:
-      tracks.context_carrier: -NULL
-    sorts: [tracks.count desc]
+      events.context_carrier: -NULL
+    sorts: [events.count desc]
     limit: 500
     width: 4
     height: 2
@@ -95,12 +95,12 @@
     title: Device Type Breakdown
     type: looker_pie
     model: demo_segment
-    explore: tracks
-    dimensions: [tracks.context_device_type]
-    measures: [tracks.count]
+    explore: events
+    dimensions: [events.context_device_type]
+    measures: [events.count]
     filters:
-      tracks.context_device_type: -NULL
-    sorts: [tracks.count desc]
+      events.context_device_type: -NULL
+    sorts: [events.count desc]
     limit: 500
     width: 4
     height: 2
@@ -109,12 +109,12 @@
     title: Top Device Models
     type: table
     model: demo_segment
-    explore: tracks
-    dimensions: [tracks.context_device_model]
-    measures: [tracks.count]
+    explore: events
+    dimensions: [events.context_device_model]
+    measures: [events.count]
     filters:
-      tracks.context_device_model: -NULL
-    sorts: [tracks.count desc]
+      events.context_device_model: -NULL
+    sorts: [events.count desc]
     limit: 50
     width: 4
     height: 2
@@ -123,13 +123,13 @@
     title: Daily Tracks Count
     type: looker_line
     model: demo_segment
-    explore: tracks
-    dimensions: [tracks.sent_date]
-    measures: [tracks.count]
+    explore: events
+    dimensions: [events.sent_date]
+    measures: [events.count]
     listen:
-      date: tracks.sent_date
-      event: tracks.event
-    sorts: [tracks.sent_date]
+      date: events.sent_date
+      event: events.event
+    sorts: [events.sent_date]
     limit: 500
     show_null_points: true
     stacking: ''
@@ -157,12 +157,12 @@
     title: Top 25 Event Types by Track Count
     type: looker_column
     model: demo_segment
-    explore: tracks
-    dimensions: [tracks.event]
-    measures: [tracks.count]
+    explore: events
+    dimensions: [events.event]
+    measures: [events.count]
     listen:
-      date: tracks.sent_date
-    sorts: [tracks.count desc]
+      date: events.sent_date
+    sorts: [events.count desc]
     limit: 25
     show_x_axis_label: true
     show_x_axis_ticks: true
