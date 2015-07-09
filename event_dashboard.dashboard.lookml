@@ -12,10 +12,9 @@
   
   - name: event
     title: Event Type
-    explore: events
-    type: field_filter
+    type: select_filter
     base_view: tracks
-    field: events.event
+    dimension: tracks.event
     
   elements:
 
