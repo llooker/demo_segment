@@ -6,10 +6,10 @@
 
 - explore: sessions
   from: sessions_trk
-  view_label: sessions
+  view_label: Sessions
   joins: 
     - join: session_trk_facts
-      view_label: sessions
+      view_label: Sessions
       foreign_key: session_id
       relationship: one_to_one
     
@@ -20,7 +20,7 @@
 
 - explore: events
   from: tracks
-  view_label: events
+  view_label: Events
   joins:
     - join: track_facts
       view_label: events
