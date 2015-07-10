@@ -158,7 +158,7 @@
     colors: ['#fcd15c', '#485963','#446c80', '#00b2d8', orange]
     filters:
       sessions_trk.start_month: 2014/09/01 to 2015/03/01
-      user_sessions_trk_facts.first_month: 2014/09/01 to 2015/03/01
+      user_session_facts.first_month: 2014/09/01 to 2015/03/01
     sorts: [user_sessions_trk_facts.first_month desc, sessions_trk.start_month]
     limit: 500
     total: false
@@ -188,7 +188,7 @@
     measures: [sessions_trk.count]
     filters:
       sessions_trk.start_month: 2014/09/01 to 2015/03/01
-      user_sessions_trk_facts.first_month: 2014/09/01 to 2015/03/01
+      user_session_facts.first_month: 2014/09/01 to 2015/03/01
     sorts: [user_sessions_trk_facts.first_month, sessions_trk.start_month desc, user_session_facts.first_month desc]
     limit: 500
     total: false

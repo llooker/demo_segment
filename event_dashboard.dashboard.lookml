@@ -12,9 +12,9 @@
   
   - name: event
     title: Event Type
-    type: select_filter
-    base_view: tracks
-    dimension: tracks.event
+    type: filter_field
+    explore: tracks
+    dimensions: tracks.event
     
   elements:
 
@@ -56,7 +56,7 @@
     measures: [pages.count_pageviews]
     listen:
       date: pages.sent_date
-      event: tracks.event
+#       event: tracks.event
     sorts: [pages.count_pageviews desc]
     limit: 500
     font_size: medium
