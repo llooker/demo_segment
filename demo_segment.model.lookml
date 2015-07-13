@@ -19,6 +19,7 @@
 
 - explore: tracks
   view_label: events
+  label: Events
   joins:
     - join: track_facts
       view_label: events
