@@ -6,6 +6,7 @@
 
 - explore: sessions_trk
   view_label: sessions
+  label: Sessions
   joins: 
     - join: session_trk_facts
       view_label: sessions

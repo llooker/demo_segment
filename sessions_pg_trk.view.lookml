@@ -1,4 +1,4 @@
-- explore: sessions_pg_trk
+#- explore: sessions_pg_trk
 - view: sessions_pg_trk
   derived_table:
     sql_trigger_value: select count(1) from ${aliases_mapping.SQL_TABLE_NAME}
