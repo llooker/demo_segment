@@ -32,7 +32,8 @@
     - join: sessions_trk
       view_label: sessions
       foreign_key: track_facts.session_id
-    
+      relationship: one_to_many
+
     - join: session_trk_facts
       view_label: sessions
       foreign_key: sessions_trk.session_id
