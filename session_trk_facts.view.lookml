@@ -21,7 +21,6 @@
   - dimension: session_id
     hidden: true
     primary_key: true
-    type: number
     sql: ${TABLE}.session_id
 
   - dimension_group: ended_at
