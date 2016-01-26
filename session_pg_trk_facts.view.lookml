@@ -39,7 +39,7 @@
     
   - dimension_group: end
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, raw]
     sql: ${TABLE}.end_at
 
   - dimension: tracks_count
@@ -62,7 +62,7 @@
   
   - dimension: session_duration_minutes
     type: number
-    sql: datediff(minutes, ${sessions_pg_trk.start_time}::timestamp, ${end_time}::timestamp)
+    sql: datediff(minutes, ${sessions_pg_trk.session_start_at_raw}, ${end_raw})
     
   - dimension: session_duration_minutes_tiered
     type: tier

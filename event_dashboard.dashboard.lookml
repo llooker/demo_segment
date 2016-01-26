@@ -33,7 +33,7 @@
     width: 4
     height: 2
   
-  - name: add_a_unique_name_438
+  - name: total_tracks
     title: Total Tracks
     type: single_value
     model: demo_segment
