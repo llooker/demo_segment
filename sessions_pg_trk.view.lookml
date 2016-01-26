@@ -1,9 +1,3 @@
-- explore: sessions_pg_trk
-  joins:
-    - join: session_pg_trk_facts
-      relationship: one_to_one
-      foreign_key: session_id
-      
 - view: sessions_pg_trk
   derived_table:
     sql_trigger_value: select count(1) from ${aliases_mapping.SQL_TABLE_NAME}
