@@ -60,7 +60,7 @@
 
   - measure: avg_page_view_duration_minutes
     type: average
-    decimals: 1
+    value_format_name: decimal_1
     sql: ${page_facts.duration_page_view_seconds}/60.0
   
   - measure: count_distinct_pageviews

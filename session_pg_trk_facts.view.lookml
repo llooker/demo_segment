@@ -74,14 +74,14 @@
   
   - measure: avg_session_duration_minutes
     type: average
-    decimals: 1
+    value_format_name: decimal_1
     sql: ${session_duration_minutes}::float
     filter:
       session_duration_minutes: '> 0' 
   
   - measure: avg_tracks_per_session
     type: average
-    decimals: 1
+    value_format_name: decimal_1
     sql: ${tracks_count}::float
 
     

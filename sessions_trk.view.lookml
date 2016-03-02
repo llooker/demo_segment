@@ -62,7 +62,7 @@
   
   - measure: avg_sessions_per_user
     type: number
-    decimals: 2
+    value_format_name: decimal_2
     sql: ${count}::numeric / nullif(${count_visitors}, 0)
   
   - measure: avg_session_duration_minutes
@@ -76,5 +76,3 @@
       - session_start_at
       - session_sequence_number
       - next_session_start_at
-
-

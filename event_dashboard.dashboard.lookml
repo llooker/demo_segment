@@ -12,9 +12,9 @@
   
   - name: event
     title: Event Type
-    type: filter_field
+    type: field_filter
     explore: tracks
-    dimensions: tracks.event
+    field: tracks.event
     
   elements:
 
@@ -33,7 +33,7 @@
     width: 4
     height: 2
   
-  - name: add_a_unique_name_438
+  - name: add_a_unique_name_4380
     title: Total Tracks
     type: single_value
     model: demo_segment
