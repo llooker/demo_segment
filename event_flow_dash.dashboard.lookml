@@ -25,8 +25,8 @@
     explore: tracks
     measures: [tracks.count, tracks_flow.event_2_drop_off, tracks_flow.event_3_drop_off,
       tracks_flow.event_4_drop_off, tracks_flow.event_5_drop_off]
-    filters:
-      tracks.event: added_item
+    listen:
+      event: tracks.event
     sorts: [tracks.count desc]
     limit: 500
     height: 4
@@ -58,8 +58,8 @@
     dimensions: [tracks.event, tracks_flow.event_2, tracks_flow.event_3, tracks_flow.event_4,
       tracks_flow.event_5]
     measures: [tracks.count, tracks.count_percent_of_total]
-    filters:
-      tracks.event: added_item
+    listen:
+      event: tracks.event
     sorts: [tracks.count desc]
     height: 4
     width: 12
@@ -75,8 +75,8 @@
     explore: tracks
     dimensions: [tracks_flow.event_2]
     measures: [tracks.count]
-    filters:
-      tracks.event: added_item
+    listen:
+      event: tracks.event
     sorts: [tracks.count desc]
     height: 4
     width: 3
@@ -106,8 +106,8 @@
     explore: tracks
     dimensions: [tracks_flow.event_3]
     measures: [tracks.count]
-    filters:
-      tracks.event: added_item
+    listen:
+      event: tracks.event
     sorts: [tracks.count desc]
     limit: 5
     height: 4
@@ -137,8 +137,8 @@
     explore: tracks
     dimensions: [tracks_flow.event_4]
     measures: [tracks.count]
-    filters:
-      tracks.event: added_item
+    listen:
+      event: tracks.event
     sorts: [tracks.count desc]
     limit: 5
     height: 4
@@ -168,8 +168,8 @@
     explore: tracks
     dimensions: [tracks_flow.event_5]
     measures: [tracks.count]
-    filters:
-      tracks.event: added_item
+    listen:
+      event: tracks.event
     sorts: [tracks.count desc]
     limit: 5
     height: 4
@@ -199,8 +199,8 @@
     explore: tracks
     dimensions: [tracks_flow.event_2]
     measures: [tracks.count, tracks.count_percent_of_total]
-    filters:
-      tracks.event: added_item
+    listen:
+      event: tracks.event
     sorts: [tracks.count desc]
     limit: 500
     height: 4
@@ -216,8 +216,8 @@
     explore: tracks
     dimensions: [tracks_flow.event_3]
     measures: [tracks.count, tracks.count_percent_of_total]
-    filters:
-      tracks.event: added_item
+    listen:
+      event: tracks.event
     sorts: [tracks.count desc]
     limit: 500
     height: 4
@@ -233,8 +233,8 @@
     explore: tracks
     dimensions: [tracks_flow.event_4]
     measures: [tracks.count, tracks.count_percent_of_total]
-    filters:
-      tracks.event: added_item
+    listen:
+      event: tracks.event
     sorts: [tracks.count desc]
     limit: 500
     height: 4
@@ -250,8 +250,8 @@
     explore: tracks
     dimensions: [tracks_flow.event_5]
     measures: [tracks.count, tracks.count_percent_of_total]
-    filters:
-      tracks.event: added_item
+    listen:
+      event: tracks.event
     sorts: [tracks.count desc]
     limit: 500
     height: 4
