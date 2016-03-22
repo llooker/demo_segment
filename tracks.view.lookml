@@ -98,7 +98,7 @@
   - measure: count_percent_of_total
     type: percent_of_total
     sql: ${count}
-    decimals: 1
+    value_format_name: decimal_1
   
     
 

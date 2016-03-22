@@ -38,7 +38,7 @@
 
   - dimension: shoe
     type: number
-    decimals: 1
+    value_format_name: decimal_1
     sql: ${TABLE}.shoe
 
   - dimension: last_seen
@@ -62,4 +62,3 @@
       - city
       - state
       - zip
-
