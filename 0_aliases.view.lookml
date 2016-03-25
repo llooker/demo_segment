@@ -1,6 +1,10 @@
 - view: aliases
   sql_table_name: hoodie.aliases
   fields:
+  
+  - dimension: user_id
+    primary_key: true
+    sql: ${TABLE}.user_id
 
   - dimension: anonymous_id
     sql: ${TABLE}.anonymous_id
@@ -32,10 +36,6 @@
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.sent_at
-
-  - dimension: user_id
-    primary_key: true
-    sql: ${TABLE}.user_id
 
   - measure: count
     type: count

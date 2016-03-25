@@ -1,6 +1,9 @@
+# Define Session Time Out Value
+# Intermediate Tables
+
 - view: sessions_trk
   derived_table:
-    sql_trigger_value: select count(1) from ${aliases_mapping.SQL_TABLE_NAME}
+    sql_trigger_value: select count(*) from ${mapped_tracks.SQL_TABLE_NAME}
     sortkeys: [session_id]
     distkey: looker_visitor_id
     sql: |

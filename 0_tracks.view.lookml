@@ -2,8 +2,31 @@
   sql_table_name: hoodie.tracks
   fields:
 
+# Required Fields
+
+  - dimension: event_id
+    primary_key: true
+    sql: ${TABLE}.event_id
+
   - dimension: anonymous_id
     sql: ${TABLE}.anonymous_id
+  
+  - dimension: user_id
+    sql: ${TABLE}.user_id
+    
+  - dimension_group: sent
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.sent_at
+  
+  - dimension: event
+    sql: ${TABLE}.event
+
+  - dimension: event_text
+    sql: ${TABLE}.event_text
+
+
+# Additional Fields
 
   - dimension: context_app_build
     sql: ${TABLE}.context_app_build
@@ -58,42 +81,27 @@
   - dimension: context_user_agent
     sql: ${TABLE}.context_user_agent
 
-  - dimension: event
-    sql: ${TABLE}.event
-
-  - dimension: event_id
-    primary_key: true
-    sql: ${TABLE}.event_id
-
-  - dimension: event_text
-    sql: ${TABLE}.event_text
-
   - dimension_group: send
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.send_at
 
-  - dimension_group: sent
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.sent_at
-  
+  - measure: count
+    type: count
+    drill_fields: [context_library_name, context_os_name]
+
+
+## Advanced Fields (require joins to other views) 
+
   - dimension_group: weeks_since_first_visit
     type: number
     sql: FLOOR(DATEDIFF(day,${user_session_facts.first_date}, ${sent_date})/7)
-  
-  - dimension: user_id
-    sql: ${TABLE}.user_id
 
   - dimension: is_new_user
     sql:  |
         CASE 
         WHEN ${sent_date} = ${user_session_facts.first_date} THEN 'New User'
         ELSE 'Returning User' END
-
-  - measure: count
-    type: count
-    drill_fields: [context_library_name, context_os_name]
   
   - measure: count_percent_of_total
     type: percent_of_total
@@ -101,8 +109,7 @@
     value_format_name: decimal_1
   
     
-
-## Session count funnel meausures
+## Advanced -- Session Count Funnel Meausures
   
   - filter: event1
     suggestions: [added_item, app_became_active, app_entered_background, 
