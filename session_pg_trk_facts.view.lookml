@@ -2,14 +2,14 @@
   derived_table:
     
     # Rebuilds after track_facts rebuilds
-    sql_trigger_value: select max(event_id) from ${event_facts.SQL_TABLE_NAME}
+    sql_trigger_value: select COUNT(*) from ${event_facts.SQL_TABLE_NAME}
     sortkeys: [session_id]
     distkey: session_id
   
     sql: |
       select s.session_id
         , first_referrer
-        , least(max(t2s.sent_at) + interval '30 minutes', min(s.next_session_start_at)) as end_at
+        , max(t2s.sent_at) as end_at
         , count(case when t2s.event_source = 'tracks' then 1 else null end) as tracks_count
       from ${sessions_pg_trk.SQL_TABLE_NAME} as s
         inner join ${event_facts.SQL_TABLE_NAME} as t2s
@@ -39,7 +39,7 @@
     
   - dimension_group: end
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, raw]
     sql: ${TABLE}.end_at
 
   - dimension: tracks_count
@@ -62,7 +62,7 @@
   
   - dimension: session_duration_minutes
     type: number
-    sql: datediff(minutes, ${sessions_pg_trk.start_time}::timestamp, ${end_time}::timestamp)
+    sql: datediff(minutes, ${sessions_pg_trk.session_start_at_raw}, ${end_raw})
     
   - dimension: session_duration_minutes_tiered
     type: tier

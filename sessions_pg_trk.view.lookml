@@ -1,4 +1,3 @@
-#- explore: sessions_pg_trk
 - view: sessions_pg_trk
   derived_table:
     sql_trigger_value: select count(1) from ${aliases_mapping.SQL_TABLE_NAME}
@@ -29,7 +28,7 @@
 
   - dimension_group: session_start_at
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, raw]
     sql: ${TABLE}.session_start_at
 
   - dimension: session_sequence_number
