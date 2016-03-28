@@ -1,8 +1,8 @@
 - view: mapped_events
   derived_table:
-    persist_for: 4 hours
     sortkeys: [event_id]
-    distkey: looker_visitor_id
+    distkey: looker_visitor_id  
+    sql_trigger_value: select current_date
     sql: |
       select *
         , datediff(minutes, lag(sent_at) over(partition by looker_visitor_id order by sent_at), sent_at) as idle_time_minutes
@@ -14,7 +14,7 @@
           , NULL as referrer
           , 'tracks' as event_source
         from hoodie.tracks as t
-        inner join ${aliases_mapping.SQL_TABLE_NAME} as a2v
+        inner join ${page_aliases_mapping.SQL_TABLE_NAME} as a2v
           on a2v.alias = coalesce(t.user_id, t.anonymous_id)
           
         union all
@@ -26,7 +26,7 @@
           , t.referrer as referrer
           , 'pages' as event_source
         from hoodie.pages as t
-        inner join ${aliases_mapping.SQL_TABLE_NAME} as a2v
+        inner join ${page_aliases_mapping.SQL_TABLE_NAME} as a2v
           on a2v.alias = coalesce(t.user_id, t.anonymous_id)                      
       ) as e 
                       

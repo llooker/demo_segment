@@ -41,7 +41,7 @@
     - join: tracks_flow
       view_label: Events Flow
       sql_on: ${track_facts.event_id} = ${tracks_flow.event_id}
-    
+      relationship: one_to_one
 
 
 

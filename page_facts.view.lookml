@@ -1,8 +1,10 @@
+## NEEDS WORK -- should be based off of session pg facts and mapped_event ###
+
 - view: page_facts
   derived_table:
-    sql_trigger_value: SELECT CURRENT_DATE
-    distkey: event_id
     sortkeys: [event_id]
+    distkey: looker_visitor_id  
+    sql_trigger_value: select count(*) from ${mapped_events.SQL_TABLE_NAME}
     sql: |
       SELECT e.event_id AS event_id
             , CASE 

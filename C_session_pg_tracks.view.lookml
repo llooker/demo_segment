@@ -1,10 +1,10 @@
 - view: sessions_pg_trk
   derived_table:
-    sql_trigger_value: select count(1) from ${aliases_mapping.SQL_TABLE_NAME}
-    sortkeys: [session_id]
-    distkey: looker_visitor_id
+    sortkeys: [event_id]
+    distkey: looker_visitor_id  
+    sql_trigger_value: select count(*) from ${mapped_events.SQL_TABLE_NAME}
+    
     sql: |
-      
         select row_number() over(partition by looker_visitor_id order by sent_at) || ' - '||  looker_visitor_id as session_id
               , looker_visitor_id
               , sent_at as session_start_at

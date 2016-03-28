@@ -15,6 +15,7 @@
     type: field_filter
     explore: tracks
     field: tracks.event
+    default_value: 'Submit'
     
   elements:
 
