@@ -33,34 +33,16 @@
 
   fields:
     - filter: event1
-      suggestions: [added_item, app_became_active, app_entered_background, 
-                app_entered_foreground, app_launched, app_resigned_active,
-                asked_for_sizes, completed_order, failed_auth_validation, logged_in,
-                made_purchase, payment_available, payment_failed, payment_form_shown,
-                payment_form_submitted, removed_item, saved_sizes, shipping_available,
-                shipping_form_failed, shipping_form_shown, shipping_form_submitted,
-                signed_up, submitted_order, switched_auth_forms, tapped_shipit,
-                view_buy_page, viewed_auth_page]
+      suggest_explore: tracks
+      suggest_dimension: tracks.event
 
     - filter: event2
-      suggestions: [added_item, app_became_active, app_entered_background, 
-                app_entered_foreground, app_launched, app_resigned_active,
-                asked_for_sizes, completed_order, failed_auth_validation, logged_in,
-                made_purchase, payment_available, payment_failed, payment_form_shown,
-                payment_form_submitted, removed_item, saved_sizes, shipping_available,
-                shipping_form_failed, shipping_form_shown, shipping_form_submitted,
-                signed_up, submitted_order, switched_auth_forms, tapped_shipit,
-                view_buy_page, viewed_auth_page]
+      suggest_explore: tracks
+      suggest_dimension: tracks.event
 
     - filter: event3
-      suggestions: [added_item, app_became_active, app_entered_background, 
-                app_entered_foreground, app_launched, app_resigned_active,
-                asked_for_sizes, completed_order, failed_auth_validation, logged_in,
-                made_purchase, payment_available, payment_failed, payment_form_shown,
-                payment_form_submitted, removed_item, saved_sizes, shipping_available,
-                shipping_form_failed, shipping_form_shown, shipping_form_submitted,
-                signed_up, submitted_order, switched_auth_forms, tapped_shipit,
-                view_buy_page, viewed_auth_page]
+      suggest_explore: tracks
+      suggest_dimension: tracks.event
 
     - dimension: session_id
       type: string
