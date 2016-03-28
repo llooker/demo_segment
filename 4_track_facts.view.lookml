@@ -1,6 +1,9 @@
-- view: track_facts # Determines event sequence numbers within session
+# Determines event sequence numbers within session
+
+
+- view: track_facts 
   derived_table:
-    sql_trigger_value: select count(1) from ${sessions_trk.SQL_TABLE_NAME}
+    sql_trigger_value: select count(*) from ${sessions_trk.SQL_TABLE_NAME}
     sortkeys: [event_id]
     distkey: looker_visitor_id
     sql: |
