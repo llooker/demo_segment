@@ -4,6 +4,47 @@
 - include: "*.view.lookml"       # include all the views
 - include: "*.dashboard.lookml"  # include all the dashboards
 
+
+## Could see performance improvements if we start off with Track Facts (reduces one level of joins for most common cases). 
+
+- explore: tracks
+  view_label: Events
+  label: Events
+  joins:
+    - join: track_facts
+      view_label: Events
+      type: left_outer
+      relationship: many_to_one
+      sql_on: |
+        tracks.event_id = track_facts.event_id and 
+        tracks.sent_at = track_facts.sent_at and
+        tracks.anonymous_id = track_facts.anonymous_id
+      
+    - join: sessions_trk
+      view_label: Sessions
+      type: left_outer
+      sql_on: ${track_facts.session_id} = ${sessions_trk.session_id}
+      relationship: one_to_many
+
+    - join: session_trk_facts
+      view_label: Sessions
+      type: left_outer
+      sql_on: ${track_facts.session_id} = ${session_trk_facts.session_id}
+      relationship: many_to_one
+    
+    - join: user_session_facts
+      view_label: Users
+      type: left_outer
+      sql_on: ${track_facts.looker_visitor_id} = ${user_session_facts.looker_visitor_id}
+      relationship: many_to_one
+    
+    - join: tracks_flow
+      view_label: Events Flow
+      sql_on: ${track_facts.event_id} = ${tracks_flow.event_id}
+    
+
+
+
 - explore: sessions_trk
   view_label: sessions
   label: Sessions
@@ -16,36 +57,6 @@
     - join: user_session_facts
       view_label: users
       foreign_key: looker_visitor_id
-
-- explore: tracks
-  view_label: Events
-  label: Events
-  joins:
-    - join: track_facts
-      view_label: Events
-      relationship: many_to_one
-      sql_on: |
-        tracks.event_id = track_facts.event_id and 
-        tracks.sent_at = track_facts.sent_at and
-        tracks.anonymous_id = track_facts.anonymous_id
-      
-    - join: sessions_trk
-      view_label: Sessions
-      foreign_key: track_facts.session_id
-      relationship: one_to_many
-
-    - join: session_trk_facts
-      view_label: Sessions
-      foreign_key: sessions_trk.session_id
-      relationship: one_to_one
-    
-    - join: tracks_flow
-      view_label: Events Flow
-      foreign_key: event_id
-    
-    - join: user_session_facts
-      view_label: Users
-      foreign_key: track_facts.looker_visitor_id
 
 - explore: pages
   joins:

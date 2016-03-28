@@ -1,5 +1,6 @@
-- view: event_list
+# Derived Table of Event Names used for Filter Suggestions
 
+- view: event_list
   derived_table:
     persist_for: 24 hours
     sortkeys: [event_types]
@@ -14,3 +15,5 @@
   fields:
   
   - dimension: event_types
+    type: string
+    sql: ${TABLE}.event_types

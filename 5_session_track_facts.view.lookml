@@ -1,10 +1,11 @@
+# Facts about a particular Session. 
+
 - view: session_trk_facts 
   derived_table:
-    sql_trigger_value: select count(1) from ${track_facts.SQL_TABLE_NAME}
+    sql_trigger_value: select count(*) from ${track_facts.SQL_TABLE_NAME}
     sortkeys: [session_id]
-    distkey: session_id
+    distkey: looker_visitor_id
     sql: |
-
       SELECT s.session_id
         , LEAST(MAX(map.sent_at) + INTERVAL '30 minutes', min(s.next_session_start_at)) AS ended_at
         , count(distinct map.event_id) AS num_pvs
@@ -13,8 +14,10 @@
         , count(case when map.event = 'tapped_shipit' then event_id else null end) as cnt_shipit
         , count(case when map.event = 'made_purchase' then event_id else null end) as cnt_made_purchase
       FROM ${sessions_trk.SQL_TABLE_NAME} AS s
-      LEFT JOIN ${track_facts.SQL_TABLE_NAME} as map USING(session_id)
+      LEFT JOIN ${track_facts.SQL_TABLE_NAME} as map on map.session_id = s.session_id
       GROUP BY 1
+                  
+                  
                   
   fields:
 
