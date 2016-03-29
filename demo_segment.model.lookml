@@ -17,7 +17,7 @@
       relationship: many_to_one
       sql_on: |
         tracks.event_id = track_facts.event_id and 
-        tracks.sent_at = track_facts.sent_at and
+        tracks.received_at = track_facts.received_at and
         tracks.anonymous_id = track_facts.anonymous_id
       
     - join: sessions_trk

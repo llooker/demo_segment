@@ -4,10 +4,10 @@
   derived_table:
     sql_trigger_value: select count(*) from ${track_facts.SQL_TABLE_NAME}
     sortkeys: [session_id]
-    distkey: looker_visitor_id
+    distkey: session_id
     sql: |
       SELECT s.session_id
-        , LEAST(MAX(map.sent_at) + INTERVAL '30 minutes', min(s.next_session_start_at)) AS ended_at
+        , MAX(map.received_at) AS ended_at
         , count(distinct map.event_id) AS num_pvs
         , count(case when map.event = 'view_buy_page' then event_id else null end) as cnt_view_buy_page
         , count(case when map.event = 'added_item' then event_id else null end) as cnt_added_item

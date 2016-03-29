@@ -10,14 +10,14 @@
       all_mappings as (
         select anonymous_id
         , user_id
-        , sent_at as sent_at
+        , received_at as received_at
         from hoodie.tracks
             
         union
             
         select user_id
           , null
-          , sent_at
+          , received_at
         from hoodie.tracks
               
               
@@ -26,14 +26,14 @@
                
         select anonymous_id
           , user_id
-          , sent_at
+          , received_at
         from hoodie.pages
                
         union
                
         select user_id
         , null
-        , sent_at
+        , received_at
         from hoodie.pages
       )
             
@@ -42,7 +42,7 @@
                 , first_value(user_id ignore nulls) 
                   over(
                       partition by anonymous_id 
-                      order by sent_at 
+                      order by received_at 
                       rows between unbounded preceding and unbounded following) as looker_visitor_id
                      
       from all_mappings
@@ -73,42 +73,42 @@
 #             all_mappings as (
 #               select anonymous_id 
 #                 , user_id 
-#                 , sent_at 
+#                 , received_at 
 #               from hoodie.tracks
 #             
 #               union
 #             
 #               select user_id
 #                 , null
-#                 , sent_at
+#                 , received_at
 #               from hoodie.tracks
 #             
 #                union
 #             
 #                select previous_id
 #                 , user_id
-#                 , sent_at
+#                 , received_at
 #                from hoodie.aliases
 #               
 #                union
 #               
 #                select user_id
 #                  , null
-#                  , sent_at
+#                  , received_at
 #                from hoodie.aliases
 #                
 #                union
 #                
 #                select anonymous_id
 #                   , user_id
-#                   , sent_at
+#                   , received_at
 #                from hoodie.pages
 #                
 #                union
 #                
 #                select user_id
 #                   , null
-#                   , sent_at
+#                   , received_at
 #                from hoodie.pages
 #             ),
 #             

@@ -9,17 +9,17 @@
     sql: |
       
         select t.anonymous_id 
-            , t.sent_at
+            , t.received_at
             , t.event_id
             , t.event
             , s.session_id
             , t.looker_visitor_id
-            , row_number() over(partition by s.session_id order by t.sent_at) as track_sequence_number
+            , row_number() over(partition by s.session_id order by t.received_at) as track_sequence_number
           from ${mapped_tracks.SQL_TABLE_NAME} as t
           inner join ${sessions_trk.SQL_TABLE_NAME} as s
           on t.looker_visitor_id = s.looker_visitor_id
-            and t.sent_at >= s.session_start_at
-            and (t.sent_at < s.next_session_start_at or s.next_session_start_at is null)
+            and t.received_at >= s.session_start_at
+            and (t.received_at < s.next_session_start_at or s.next_session_start_at is null)
     
   fields:
 

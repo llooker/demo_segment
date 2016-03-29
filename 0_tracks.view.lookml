@@ -14,11 +14,11 @@
   - dimension: user_id
     sql: ${TABLE}.user_id
     
-  - dimension_group: sent
+  - dimension_group: received
     type: time
     timeframes: [time, date, week, month]
-    sql: ${TABLE}.sent_at
-  
+    sql: ${TABLE}.received_at 
+    
   - dimension: event
     sql: ${TABLE}.event
 
@@ -81,10 +81,15 @@
   - dimension: context_user_agent
     sql: ${TABLE}.context_user_agent
 
-  - dimension_group: send
+#   - dimension_group: send
+#     type: time                               ##DEPRECATED
+#     timeframes: [time, date, week, month]
+#     sql: ${TABLE}.send_at
+    
+  - dimension_group: sent
     type: time
     timeframes: [time, date, week, month]
-    sql: ${TABLE}.send_at
+    sql: ${TABLE}.sent_at  
 
   - measure: count
     type: count

@@ -10,11 +10,12 @@
 
   - dimension: anonymous_id
     sql: ${TABLE}.anonymous_id
-  
-  - dimension_group: sent
+ 
+  - dimension_group: received
     type: time
     timeframes: [time, date, week, month]
-    sql: ${TABLE}.sent_at
+    sql: ${TABLE}.received_at
+    
   
   - dimension: user_id
     hidden: true
@@ -47,10 +48,15 @@
   - dimension: search
     sql: ${TABLE}.search
 
-  - dimension_group: send
+  - dimension_group: sent
     type: time
     timeframes: [time, date, week, month]
-    sql: ${TABLE}.send_at
+    sql: ${TABLE}.sent_at
+    
+#   - dimension_group: send
+#     type: time                                ##DEPRECATED
+#     timeframes: [time, date, week, month]
+#     sql: ${TABLE}.send_at
   
   - dimension: title
     sql: ${TABLE}.title

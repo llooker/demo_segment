@@ -7,12 +7,12 @@
     sql_trigger_value: select current_date
     sql: |
       select *
-        , datediff(minutes, lag(sent_at) over(partition by looker_visitor_id order by sent_at), sent_at) as idle_time_minutes
+        , datediff(minutes, lag(received_at) over(partition by looker_visitor_id order by received_at), received_at) as idle_time_minutes
         from (
           select t.event_id as event_id
           , t.anonymous_id
           , a2v.looker_visitor_id
-          , t.sent_at
+          , t.received_at
           , t.event as event
           from hoodie.tracks as t
           inner join ${aliases_mapping.SQL_TABLE_NAME} as a2v
@@ -31,10 +31,10 @@
   - dimension: looker_visitor_id
     sql: ${TABLE}.looker_visitor_id
 
-  - dimension_group: sent_at
+  - dimension_group: received_at
     type: time
     timeframes: [time, date, week, month]
-    sql: ${TABLE}.sent_at
+    sql: ${TABLE}.received_at
 
   - dimension: event
     sql: ${TABLE}.event
@@ -47,7 +47,7 @@
     detail:
       - event_id
       - looker_visitor_id
-      - sent_at
+      - received_at
       - event
       - idle_time_minutes
 
