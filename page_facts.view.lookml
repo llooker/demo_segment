@@ -7,10 +7,11 @@
     sql_trigger_value: select count(*) from ${mapped_events.SQL_TABLE_NAME}
     sql: |
       SELECT e.event_id AS event_id
+            , e.looker_visitor_id
             , CASE 
-                WHEN DATEDIFF(seconds, e.sent_at, LEAD(e.sent_at) OVER(PARTITION BY e.user_id ORDER BY e.sent_at)) > 30*60 THEN NULL 
-                ELSE DATEDIFF(seconds, e.sent_at, LEAD(e.sent_at) OVER(PARTITION BY e.user_id ORDER BY e.sent_at)) END AS lead_idle_time_condition
-      FROM hoodie.pages AS e
+                WHEN DATEDIFF(seconds, e.sent_at, LEAD(e.sent_at) OVER(PARTITION BY e.looker_visitor_id ORDER BY e.sent_at)) > 30*60 THEN NULL 
+                ELSE DATEDIFF(seconds, e.sent_at, LEAD(e.sent_at) OVER(PARTITION BY e.looker_visitor_id ORDER BY e.sent_at)) END AS lead_idle_time_condition
+      FROM ${mapped_events.SQL_TABLE_NAME} AS e
       order by e.sent_at
 
   fields:
@@ -28,6 +29,8 @@
     type: yesno
     sql: 
       ${duration_page_view_seconds} is NULL
+  
+  - dimension: looker_visitor_id
 
   sets:
     detail:

@@ -65,8 +65,9 @@
     sql_on: aliases_mapping.alias = coalesce(pages.user_id, pages.anonymous_id)
   
   - join: page_facts
-    foreign_key: event_id
-
+    sql_on: ${pages.event_id} = ${page_facts.event_id} and ${aliases_mapping.looker_visitor_id} = ${page_facts.looker_visitor_id}
+    relationship: one_to_one
+    
 - explore: funnel_explorer
   joins:
     - join: sessions_trk
