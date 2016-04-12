@@ -9,6 +9,7 @@
       from (
         select t.event_id || '-t' as event_id
           , a2v.looker_visitor_id
+          , t.anonymous_id
           , t.received_at
           , t.event as event
           , NULL as referrer
@@ -21,6 +22,7 @@
                       
         select t.event_id || '-p' as event_id
           , a2v.looker_visitor_id
+          , t.anonymous_id
           , t.received_at
           , t.path as event
           , t.referrer as referrer
@@ -38,6 +40,9 @@
 
   - dimension: looker_visitor_id
     sql: ${TABLE}.looker_visitor_id
+  
+  - dimension: anonymous_id
+    sql: ${TABLE}.anonymous_id
 
   - dimension_group: received_at
     type: time

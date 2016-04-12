@@ -7,7 +7,6 @@
     sortkeys: [event_id]
     distkey: looker_visitor_id
     sql: |
-      
         select t.anonymous_id 
             , t.received_at
             , t.event_id
