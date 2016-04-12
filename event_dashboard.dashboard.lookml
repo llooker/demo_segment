@@ -50,20 +50,20 @@
     width: 4
     height: 2
   
-  - name: add_a_unique_name_863
-    title: Pages Count
-    type: single_value
-    model: demo_segment
-    explore: pages
-    measures: [pages.count_pageviews]
-    listen:
-      date: pages.sent_date
-#       event: tracks.event
-    sorts: [pages.count_pageviews desc]
-    limit: 500
-    font_size: medium
-    width: 4
-    height: 2
+#   - name: add_a_unique_name_863
+#     title: Pages Count
+#     type: single_value
+#     model: demo_segment
+#     explore: pages
+#     measures: [pages.count_pageviews]
+#     listen:
+#       date: pages.sent_date
+# #       event: tracks.event
+#     sorts: [pages.count_pageviews desc]
+#     limit: 500
+#     font_size: medium
+#     width: 4
+#     height: 2
 
   - name: add_a_unique_name_313
     title: Carrier Breakdown

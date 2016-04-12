@@ -2,13 +2,13 @@
   derived_table:
   
     # Rebuilds after sessions rebuilds
-    sql_trigger_value: select count(1) from ${sessions_pg_trk.SQL_TABLE_NAME}
+    sql_trigger_value: select count(*) from ${sessions_pg_trk.SQL_TABLE_NAME}
     sortkeys: [event_id]
     distkey: looker_visitor_id
   
     sql: |
-
         select t.received_at 
+          , t.anonymous_id
           , t.event_id
           , t.event
           , t.event_source
@@ -50,8 +50,12 @@
               ELSE ${first_referrer_domain} END
     
   - dimension: looker_visitor_id
-    type: int
+    type: number
     sql: ${TABLE}.looker_visitor_id
+  
+  - dimension: anonymous_id
+    type: string
+    sql: ${TABLE}.anonymous_id
 
   - dimension: sequence_number
     type: number

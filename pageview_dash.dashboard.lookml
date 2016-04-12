@@ -21,12 +21,26 @@
     measures: [pages.count_pageviews]
     sorts: [pages.count_pageviews desc]
     listen: 
-      date: pages.sent_date
+      date: pages.received_date
     limit: 500
     font_size: medium
     width: 3
     height: 2
+
+
   
+#   - name: add_a_unique_name_1460489084289
+#   title: Untitled Visualization
+#   type: single_value
+#   model: pages
+#   explore: event_facts
+#   measures: [event_facts.count_visitors, pages.count_pageviews, pages.count_distinct_pageviews,
+#     pages.avg_page_view_duration_minutes]
+#   sorts: [event_facts.count_visitors desc]
+#   limit: 500
+#   font_size: medium
+#   text_color: black
+
   - name: add_a_unique_name_325
     title: Distinct Pageviews
     type: single_value

@@ -33,10 +33,12 @@
   
   - dimension: looker_visitor_id
     hidden: true
+    type: string
+    sql: ${TABLE}.looker_visitor_id
   
   - dimension: received_at
     hidden: true
-    
+
   sets:
     detail:
       - event_id

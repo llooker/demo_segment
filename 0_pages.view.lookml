@@ -9,6 +9,7 @@
     sql: ${TABLE}.event_id
 
   - dimension: anonymous_id
+    hidden: true
     sql: ${TABLE}.anonymous_id
  
   - dimension_group: received
@@ -60,10 +61,10 @@
   
   - dimension: title
     sql: ${TABLE}.title
-  
+    
   - measure: count_visitors
     type: count_distinct 
-    sql: ${aliases_mapping.looker_visitor_id}
+    sql: ${page_aliases_mapping.looker_visitor_id}
 
   - measure: count_pageviews
     type: count
@@ -76,4 +77,4 @@
   
   - measure: count_distinct_pageviews
     type: number
-    sql: COUNT(DISTINCT CONCAT(${user_id}, ${url}))
+    sql: COUNT(DISTINCT CONCAT(${page_facts.looker_visitor_id}, ${url}))

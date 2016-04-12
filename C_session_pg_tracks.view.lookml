@@ -17,6 +17,7 @@
   fields:
 
   - dimension: session_id
+    hidden: true
     sql: ${TABLE}.session_id
 
   - dimension: looker_visitor_id

@@ -24,7 +24,7 @@
       view_label: Sessions
       type: left_outer
       sql_on: ${track_facts.session_id} = ${sessions_trk.session_id}
-      relationship: one_to_many
+      relationship: many_to_one
 
     - join: session_trk_facts
       view_label: Sessions
@@ -60,17 +60,17 @@
 
 - explore: pages
   joins:
-  - join: aliases_mapping
+  - join: page_aliases_mapping
     relationship: many_to_one
-    sql_on: aliases_mapping.alias = coalesce(pages.user_id, pages.anonymous_id)
+    sql_on: page_aliases_mapping.alias = coalesce(pages.user_id, pages.anonymous_id)
   
   - join: page_facts
     sql_on: |
       ${pages.event_id} || '-p' = ${page_facts.event_id} and 
-      ${aliases_mapping.looker_visitor_id} = ${page_facts.looker_visitor_id} and 
+      ${page_aliases_mapping.looker_visitor_id} = ${page_facts.looker_visitor_id} and 
       ${pages.received_raw} = ${page_facts.received_at}
     relationship: one_to_one
-    
+
 - explore: funnel_explorer
   joins:
     - join: sessions_trk

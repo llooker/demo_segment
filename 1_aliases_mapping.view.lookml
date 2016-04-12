@@ -5,8 +5,7 @@
     distkey: alias
     sql: |
       with
-            
-            -- Establish all child-to-parent edges from tables (tracks, pages, aliases) 
+      -- Establish all child-to-parent edges from tables (tracks, pages, aliases) 
       all_mappings as (
         select anonymous_id
         , user_id
@@ -19,47 +18,28 @@
           , null
           , received_at
         from hoodie.tracks
-              
-              
-            -- INCLUDE THESE UNIONS IF PAGE VIEWS WILL BE TRACKED 
-        union
-               
-        select anonymous_id
-          , user_id
-          , received_at
-        from hoodie.pages
-               
-        union
-               
-        select user_id
-        , null
-        , received_at
-        from hoodie.pages
       )
             
       select 
-                  distinct anonymous_id as alias
-                , first_value(user_id ignore nulls) 
-                  over(
-                      partition by anonymous_id 
-                      order by received_at 
-                      rows between unbounded preceding and unbounded following) as looker_visitor_id
-                     
+        distinct anonymous_id as alias
+        , first_value(user_id ignore nulls) 
+        over(
+          partition by anonymous_id 
+          order by received_at 
+          rows between unbounded preceding and unbounded following) as looker_visitor_id
       from all_mappings
-
-    
-
-
 
   fields:
   
   # Anonymous ID
   - dimension: alias
     primary_key: true
+    type: string
     sql: ${TABLE}.alias
 
   # User ID
   - dimension: looker_visitor_id
+    type: string
     sql: ${TABLE}.looker_visitor_id
     
     
