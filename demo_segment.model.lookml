@@ -66,9 +66,9 @@
   
   - join: page_facts
     sql_on: |
-      ${pages.event_id} = ${page_facts.event_id} and 
+      ${pages.event_id} || '-p' = ${page_facts.event_id} and 
       ${aliases_mapping.looker_visitor_id} = ${page_facts.looker_visitor_id} and 
-      pages.sent_at = ${page_facts.sent_at}
+      ${pages.received_raw} = ${page_facts.received_at}
     relationship: one_to_one
     
 - explore: funnel_explorer

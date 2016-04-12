@@ -8,12 +8,12 @@
     sql: |
       SELECT e.event_id AS event_id
             , e.looker_visitor_id
-            , e.sent_at
+            , e.received_at
             , CASE 
-                WHEN DATEDIFF(seconds, e.sent_at, LEAD(e.sent_at) OVER(PARTITION BY e.looker_visitor_id ORDER BY e.sent_at)) > 30*60 THEN NULL 
-                ELSE DATEDIFF(seconds, e.sent_at, LEAD(e.sent_at) OVER(PARTITION BY e.looker_visitor_id ORDER BY e.sent_at)) END AS lead_idle_time_condition
+                WHEN DATEDIFF(seconds, e.received_at, LEAD(e.received_at) OVER(PARTITION BY e.looker_visitor_id ORDER BY e.received_at)) > 30*60 THEN NULL 
+                ELSE DATEDIFF(seconds, e.received_at, LEAD(e.received_at) OVER(PARTITION BY e.looker_visitor_id ORDER BY e.received_at)) END AS lead_idle_time_condition
       FROM ${mapped_events.SQL_TABLE_NAME} AS e
-      order by e.sent_at
+      order by e.received_at
 
   fields:
 
@@ -32,9 +32,11 @@
       ${duration_page_view_seconds} is NULL
   
   - dimension: looker_visitor_id
+    hidden: true
   
-  - dimension: sent_at
-
+  - dimension: received_at
+    hidden: true
+    
   sets:
     detail:
       - event_id

@@ -15,7 +15,7 @@
     type: field_filter
     explore: tracks
     field: tracks.event
-    default_value: 'Submit'
+    default_value: 'signed_up'
     
   elements:
 

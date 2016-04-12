@@ -13,7 +13,7 @@
  
   - dimension_group: received
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, raw]
     sql: ${TABLE}.received_at
     
   

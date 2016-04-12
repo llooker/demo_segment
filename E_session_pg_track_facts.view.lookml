@@ -62,7 +62,7 @@
   
   - dimension: session_duration_minutes
     type: number
-    sql: datediff(minutes, ${sessions_pg_trk.session_start_at_raw}, ${end_raw})
+    sql: datediff(minutes, ${sessions_pg_trk.start_raw}, ${end_raw})
     
   - dimension: session_duration_minutes_tiered
     type: tier
