@@ -1,9 +1,7 @@
 - view: funnel_explorer
-
-# Or, you could make this view a derived table, like this:
   derived_table:
     sql: |
-      SELECT sessions.session_id as session_id
+      SELECT tracks_sessions_map.session_id as session_id
         , MIN(
             CASE WHEN
               {% condition event1 %} tracks.event {% endcondition %} 
@@ -27,8 +25,6 @@
         ON aliases_mapping.alias = coalesce(tracks.user_id, tracks.anonymous_id)
       LEFT JOIN ${track_facts.SQL_TABLE_NAME} as tracks_sessions_map
         ON tracks.event_id = tracks_sessions_map.event_id      
-      LEFT JOIN ${sessions_trk.SQL_TABLE_NAME} as sessions
-        ON tracks_sessions_map.session_id = sessions.session_id
       GROUP BY 1
 
   fields:
