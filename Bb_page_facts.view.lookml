@@ -1,5 +1,3 @@
-## NEEDS WORK -- should be based off of session pg facts and mapped_event ###
-
 - view: page_facts
   derived_table:
     sortkeys: [event_id]
