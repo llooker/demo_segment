@@ -2,6 +2,8 @@
 
 - include: "*.view.lookml"       # include all views in this project
 - include: "1_event_dashboard.dashboard.lookml"  # include all dashboards in this project
+- include: "2_session_dashboard.dashboard.lookml"  # include all dashboards in this project
+- include: "3_event_flow_dashboard.dashboard.lookml"  # include all dashboards in this project
 
 - explore: track_facts
   view_label: Events
