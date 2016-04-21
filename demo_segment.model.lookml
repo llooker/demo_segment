@@ -2,8 +2,9 @@
 
 - scoping: true                  # for backward compatibility
 - include: "*.view.lookml"       # include all the views
-- include: "*.dashboard.lookml"  # include all the dashboards
-
+- include: "event*.dashboard.lookml"  # include all the dashboards
+- include: "pageview*.dashboard.lookml" 
+- include: "sessions*.dashboard.lookml" 
 
 ## Could see performance improvements if we start off with Track Facts (reduces one level of joins for most common cases). 
 

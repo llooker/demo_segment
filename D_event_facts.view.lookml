@@ -28,11 +28,11 @@
 
   - dimension: event_id
     primary_key: true
-    hidden: true
+#     hidden: true
     sql: ${TABLE}.event_id
   
   - dimension: event
-    hidden: true
+#     hidden: true
     sql: ${TABLE}.event
 
   - dimension: session_id
@@ -50,7 +50,7 @@
               ELSE ${first_referrer_domain} END
     
   - dimension: looker_visitor_id
-    type: number
+    type: string
     sql: ${TABLE}.looker_visitor_id
   
   - dimension: anonymous_id

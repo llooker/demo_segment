@@ -3,6 +3,8 @@
 - include: "*.view.lookml"       # include all views in this project
 # - include: ".dashboard.lookml"  # include all dashboards in this project
 
+# - explore: pages
+
 - explore: event_facts
   view_label: Events
   label: Events
@@ -11,10 +13,20 @@
     view_label: Events
     type: left_outer
     sql_on: |
-      event_facts.event_id = pages.event_id and
-      event_facts.received_at = pages.received_at and 
-      event_facts.looker_visitor_id = pages.user_id
+      event_facts.event_id = concat(pages.event_id, '-p')
+      and event_facts.received_at = pages.received_at  
+      and event_facts.anonymous_id = pages.anonymous_id
     relationship: one_to_one
+    
+  - join: tracks
+    view_label: Events
+    type: left_outer
+    sql_on: |
+      event_facts.event_id = concat(tracks.event_id, '-t')
+      and event_facts.received_at = tracks.received_at  
+      and event_facts.anonymous_id = tracks.anonymous_id
+    relationship: one_to_one
+    fields: [context_app_build, context_device_model]
   
   - join: page_facts
     view_label: Events
@@ -25,10 +37,6 @@
       event_facts.looker_visitor_id = page_facts.looker_visitor_id
     relationship: one_to_one
     
-  - join: page_aliases_mapping
-    relationship: many_to_one
-    sql_on: page_aliases_mapping.alias = coalesce(pages.user_id, pages.anonymous_id)
-  
   - join: sessions_pg_trk
     view_label: Sessions
     type: left_outer

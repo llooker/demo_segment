@@ -9,12 +9,14 @@
     title: "Date"
     type: date_filter
     default_value: 2014
-#   
+
 #   - name: event
-#     title: Event Type
+#     title: 'First Event'
 #     type: field_filter
-#     explore: track_facts
-#     field: tracks.event
+#     model: tracks
+#     explore: events
+#     field: track_facts.event
+#     default_value: 'signed_up'
 #     
   elements:
 
@@ -65,6 +67,20 @@
 #     width: 4
 #     height: 2
 
+  - name: add_a_unique_name_769
+    title: Device Type Breakdown
+    type: looker_pie
+    model: demo_segment
+    explore: tracks
+    dimensions: [tracks.context_device_type]
+    measures: [tracks.count]
+    filters:
+      tracks.context_device_type: -NULL
+    sorts: [tracks.count desc]
+    limit: 500
+    width: 4
+    height: 2
+
   - name: add_a_unique_name_313
     title: Carrier Breakdown
     type: looker_pie
@@ -76,8 +92,8 @@
       tracks.context_carrier: -NULL
     sorts: [tracks.count desc]
     limit: 500
-    width: 4
-    height: 2
+    width: 6
+    height: 4
   
 #   - name: add_a_unique_name_203
 #     title: Manufacturer Breakdown
@@ -93,20 +109,6 @@
 #     width: 3
 #     height: 3
   
-  - name: add_a_unique_name_769
-    title: Device Type Breakdown
-    type: looker_pie
-    model: demo_segment
-    explore: tracks
-    dimensions: [tracks.context_device_type]
-    measures: [tracks.count]
-    filters:
-      tracks.context_device_type: -NULL
-    sorts: [tracks.count desc]
-    limit: 500
-    width: 4
-    height: 2
-  
   - name: add_a_unique_name_11
     title: Top Device Models
     type: table
@@ -118,8 +120,8 @@
       tracks.context_device_model: -NULL
     sorts: [tracks.count desc]
     limit: 50
-    width: 4
-    height: 2
+    width: 6
+    height: 4
     
   - name: add_a_unique_name_110
     title: Daily Tracks Count

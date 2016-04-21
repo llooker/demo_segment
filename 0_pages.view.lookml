@@ -64,7 +64,7 @@
     
   - measure: count_visitors
     type: count_distinct 
-    sql: ${page_aliases_mapping.looker_visitor_id}
+    sql: ${page_facts.looker_visitor_id}
 
   - measure: count_pageviews
     type: count
