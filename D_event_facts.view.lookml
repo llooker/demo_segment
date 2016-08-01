@@ -4,7 +4,7 @@
     # Rebuilds after sessions rebuilds
     sql_trigger_value: select count(*) from ${sessions_pg_trk.SQL_TABLE_NAME}
     sortkeys: [event_id]
-    distkey: looker_visitor_id
+    distkey: event_id
   
     sql: |
         select t.received_at 

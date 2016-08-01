@@ -10,14 +10,14 @@
     type: date_filter
     default_value: 2014
 
-#   - name: event
-#     title: 'First Event'
-#     type: field_filter
-#     model: tracks
-#     explore: events
-#     field: track_facts.event
-#     default_value: 'signed_up'
-#     
+  - name: event
+    title: 'First Event'
+    type: field_filter
+    model: tracks
+    explore: track_facts
+    field: tracks.event
+    default_value: 'signed_up'
+    
   elements:
 
   - name: unique_users
@@ -132,7 +132,7 @@
     measures: [tracks.count]
     listen:
       date: tracks.sent_date
-      event: tracks.event
+#      event: tracks.event
     sorts: [tracks.sent_date]
     limit: 500
     show_null_points: true
