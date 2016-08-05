@@ -69,7 +69,7 @@
     sql_on: |
       ${pages.event_id} || '-p' = ${page_facts.event_id} and 
       ${page_aliases_mapping.looker_visitor_id} = ${page_facts.looker_visitor_id} and 
-      ${pages.received_raw} = ${page_facts.received_at}
+      ${pages.received_raw} = ${page_facts.received_raw}
     relationship: one_to_one
 
 - explore: funnel_explorer

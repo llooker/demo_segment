@@ -1,6 +1,6 @@
 - view: page_facts
   derived_table:
-    sortkeys: [event_id]
+    sortkeys: [received_at]
     distkey: looker_visitor_id  
     sql_trigger_value: select count(*) from ${mapped_events.SQL_TABLE_NAME}
     sql: |
@@ -11,7 +11,6 @@
                 WHEN DATEDIFF(seconds, e.received_at, LEAD(e.received_at) OVER(PARTITION BY e.looker_visitor_id ORDER BY e.received_at)) > 30*60 THEN NULL 
                 ELSE DATEDIFF(seconds, e.received_at, LEAD(e.received_at) OVER(PARTITION BY e.looker_visitor_id ORDER BY e.received_at)) END AS lead_idle_time_condition
       FROM ${mapped_events.SQL_TABLE_NAME} AS e
-      order by e.received_at
 
   fields:
 
@@ -34,8 +33,12 @@
     type: string
     sql: ${TABLE}.looker_visitor_id
   
-  - dimension: received_at
+  - dimension: received
     hidden: true
+    type: time
+    datatype: timestamp
+    timeframes: [raw, time,date,month,day_of_week,year]
+    sql: ${TABLE}.received_at
 
   sets:
     detail:
