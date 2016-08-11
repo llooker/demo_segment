@@ -90,3 +90,6 @@
     - join: users
       relationship: many_to_one
       sql_on: coalesce(users.mapped_user_id, users.user_id) = sessions.user_id
+      
+- explore: event_list
+  hidden: true
