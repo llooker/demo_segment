@@ -8,7 +8,7 @@
         , datediff(minutes, lag(received_at) over(partition by looker_visitor_id order by received_at), received_at) as idle_time_minutes
       from (
         select t.event_id || '-t' as event_id
-          , a2v.looker_visitor_id
+          , coalesce(a2v.looker_visitor_id,a2v.alias) as looker_visitor_id
           , t.anonymous_id
           , t.received_at
           , t.event as event
@@ -21,7 +21,7 @@
         union all
                       
         select t.event_id || '-p' as event_id
-          , a2v.looker_visitor_id
+          , coalesce(a2v.looker_visitor_id,a2v.alias)
           , t.anonymous_id
           , t.received_at
           , t.path as event

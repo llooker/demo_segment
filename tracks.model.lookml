@@ -49,7 +49,7 @@
       relationship: one_to_one
     
     - join: user_session_facts
-      view_label: users
+      view_label: Users
       sql_on: ${sessions_trk.looker_visitor_id} = ${user_session_facts.looker_visitor_id}
       relationship: many_to_one
 
@@ -60,7 +60,7 @@
       foreign_key: session_id
     
     - join: user_session_facts
-      view_label: users
+      view_label: Users
       foreign_key: sessions_trk.looker_visitor_id
     
     - join: session_trk_facts

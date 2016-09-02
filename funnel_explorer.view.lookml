@@ -43,17 +43,17 @@
 
     - dimension: event1
       type: time
-      timeframes: [time]
+      timeframes: [raw, time]
       sql: ${TABLE}.event1_time
 
     - dimension: event2
       type: time
-      timeframes: [time]
+      timeframes: [raw, time]
       sql: ${TABLE}.event2_time
 
     - dimension: event3
       type: time
-      timeframes: [time]
+      timeframes: [raw, time]
       sql: ${TABLE}.event3_time
     
     - dimension: event1_before_event2
@@ -63,6 +63,10 @@
     - dimension: event2_before_event3
       type: yesno
       sql: ${event2_time} < ${event3_time}
+      
+    - dimension: minutes_in_funnel
+      type: number
+      sql: datediff(min,${event1_raw},COALESCE(${event3_raw},${event2_raw}))
 
     - measure: count_sessions
       type: count_distinct

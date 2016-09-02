@@ -1,6 +1,5 @@
 - connection: partners_segment
 
-- scoping: true                  # for backward compatibility
 - include: "*.view.lookml"       # include all the views
 - include: "event*.dashboard.lookml"  # include all the dashboards
 - include: "pageview*.dashboard.lookml" 
