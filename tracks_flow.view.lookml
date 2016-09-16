@@ -6,6 +6,7 @@
             , a.track_sequence_number
             , a.event
             , a.looker_visitor_id
+            , a.received_at
             , b.event as event_2
             , c.event as event_3
             , d.event as event_4
@@ -46,22 +47,41 @@
     sql: ${TABLE}.track_sequence_number
 
   - dimension: event
-    hidden: true
+#     hidden: true
     sql: ${TABLE}.event
 
   - dimension: user_id
     hidden: true
     sql: ${TABLE}.user_id
+    
+  - dimension_group: received_at
+    type: time
+    datatype: datetime
+    timeframes: [date,week,month,year]
+    sql: ${TABLE}.received_at
 
   - dimension: event_2
     label: '2nd Event'
     sql: ${TABLE}.event_2
+  
+  - measure: event_1_count
+    type: count
   
   - measure: event_2_drop_off
     label: '2nd Event Remaining Count'
     type: count
     filter: 
       event_2: -NULL
+      
+  - measure: event_2_3_dropoff_percent
+    value_format_name: percent_0
+    type: number
+    sql: cast(${event_3_drop_off} as float)/cast(${event_2_drop_off} as float)
+    
+  - measure: event_3_4_dropoff_percent
+    value_format_name: percent_0
+    type: number
+    sql: ${event_4_drop_off}/${event_3_drop_off}
     
   - dimension: event_3
     label: '3rd Event'
