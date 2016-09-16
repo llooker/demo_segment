@@ -37,12 +37,11 @@
             
       select 
                   distinct anonymous_id as alias
-                , first_value(user_id ignore nulls) 
+                  , coalesce(first_value(user_id ignore nulls) 
                   over(
-                      partition by anonymous_id 
-                      order by received_at 
-                      rows between unbounded preceding and unbounded following) as looker_visitor_id
-                     
+                    partition by anonymous_id 
+                    order by received_at 
+                    rows between unbounded preceding and unbounded following),anonymous_id) as looker_visitor_id
       from all_mappings
 
   fields:
@@ -55,6 +54,13 @@
   # User ID
   - dimension: looker_visitor_id
     sql: ${TABLE}.looker_visitor_id
+  
+  - measure: count
+    type: count
+    
+  - measure: count_visitor
+    type: count_distinct
+    sql: ${looker_visitor_id}
     
     
     

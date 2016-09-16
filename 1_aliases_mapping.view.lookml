@@ -23,10 +23,12 @@
       select 
         distinct anonymous_id as alias
         , first_value(user_id ignore nulls) 
+        
+        , coalesce(first_value(user_id ignore nulls) 
         over(
           partition by anonymous_id 
           order by received_at 
-          rows between unbounded preceding and unbounded following) as looker_visitor_id
+          rows between unbounded preceding and unbounded following),anonymous_id) as looker_visitor_id
       from all_mappings
 
   fields:
