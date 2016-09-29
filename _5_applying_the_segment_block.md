@@ -16,3 +16,9 @@ When applying the Segment template, it will need to be tailored to the underlyin
 1.  Whether they come from only Tracks or both Pages and Tracks
 1. Session timeout/Requirements for a new session 
 1. Custom info from `<schema>.event` tables that is of importance
+
+[:point_right:](_6_user_id_consolidation.md) Continue to [User ID Consolidation](_6_user_id_consolidation.md)
+
+[:point_left:](_4_initial_validation.md) Back to [Initial Validation](_4_initial_validation.md)
+
+[:house:](README.md) README [Table of Contents](README.md)
