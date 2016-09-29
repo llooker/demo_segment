@@ -86,3 +86,9 @@ select distinct alias
 ```
 
 Then we basically join the table onto itself as many times as we think is necessary to get the most accurate mapping, as shown in the final step. We then have 2 fields: alias and looker_visitor_id, that we can use to map events later in the model to a universal user id.
+
+[:point_right:](_7_session_creation_overview.md) Continue to [Session Creation Overview](_7_session_creation_overview.md)
+
+[:point_left:](_5_applying_the_segment_block.md) Back to [Initial Validation](_5_applying_the_segment_block.md)
+
+[:house:](README.md) README [Table of Contents](README.md)
