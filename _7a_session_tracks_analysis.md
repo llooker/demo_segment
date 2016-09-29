@@ -15,3 +15,8 @@ For Track Analysis, refer to the tracks model and the numbered View Files (ex. 1
 
 **Event Metadata Tables** - Segment provides Event Metadata tables that contain additional attributes about a particular events. For example, a “submit” event table might contain information from the form attributes that collected when the submit action occurred. Join in these metadata tables back to the model as appropriate. 
 
+[:point_right:](_8_sample_advanced_design_patterns.md) Continue to [Sample Advanced Design Patterns](_8_sample_advanced_design_patterns.md)
+
+[:point_left:](_7_session_creation_overview.md) Back to [Session Creation Overview](_7_session_creation_overview.md)
+
+[:house:](README.md) README [Table of Contents](README.md)
