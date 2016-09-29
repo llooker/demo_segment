@@ -2,7 +2,7 @@
 
 Use this pattern when customers would like to include both pages and tracks events when defining their sessions. For instance, this pattern will enable a first referrer analysis (beneficial for webpages where URL/page hits are important).
 
-![page track analysis](https://lh5.googleusercontent.com/BCv54yGFDmGdWvpYU-sKM5oxtw1C2KIYPg2YVrN1eyySDDkS4UMwTJYIW3kSplRgvKUluxWB-G8t5Ws=w1411-h646)
+![page track analysis](http://gdurl.com/46Cz)
 
 A. **Alias Mapping** <A_aliases_mapping>- User ID Consolidation from Tracks and Pages Table 
 
