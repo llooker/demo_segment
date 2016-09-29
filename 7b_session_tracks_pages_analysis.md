@@ -1,0 +1,15 @@
+## Page and Track Analysis: 
+
+Use this pattern when customers would like to include both pages and tracks events when defining their sessions. For instance, this pattern will enable a first referrer analysis (beneficial for webpages where URL/page hits are important).
+
+![page track analysis](https://lh5.googleusercontent.com/BCv54yGFDmGdWvpYU-sKM5oxtw1C2KIYPg2YVrN1eyySDDkS4UMwTJYIW3kSplRgvKUluxWB-G8t5Ws=w1411-h646)
+
+A. **Alias Mapping** <A_aliases_mapping>- User ID Consolidation from Tracks and Pages Table 
+
+B. **Mapped Events** <B_mapped_events>- Serves to map all events (Tracks and Pages) to universal user id as first step in sessionization. Ranks events by User and get the time difference between one event to the next. 
+
+C. **Session Track Pages** <C_session_pg_tracks>- Creates sessions from Mapped Events by identifying a period of inactivity greater than 30 minutes, ending the current session and creating a new one.
+
+D. **Event Facts** <D_event_facts>- Maps events to session ids. This table will the starting point for exploration as it contains all the necessary keys (Session ID, Universal User ID) for all relevant joins. Session or User fact tables can be created from Event facts to speed up query results. 
+
+Looker Model - These individual files can be integrated in the Pages Model File <pages>. Event_id is NOT the primary key for Events, so joins must use multiple identifiers on required fields, like anonymous_id, received_at, and event_id. Also event_id may be called id, just swap the name.
