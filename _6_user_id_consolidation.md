@@ -89,6 +89,6 @@ Then we basically join the table onto itself as many times as we think is necess
 
 [:point_right:](_7_session_creation_overview.md) Continue to [Session Creation Overview](_7_session_creation_overview.md)
 
-[:point_left:](_5_applying_the_segment_block.md) Back to [Initial Validation](_5_applying_the_segment_block.md)
+[:point_left:](_5_applying_the_segment_block.md) Back to [Applying the Segment Block](_5_applying_the_segment_block.md)
 
 [:house:](README.md) README [Table of Contents](README.md)
