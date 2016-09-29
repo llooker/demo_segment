@@ -10,3 +10,9 @@ An important part of the initial data validation is making sure the event data h
 1. Verify the events in Tracks (`tracks.event`) are as expected.
 
 If you see any deviations from expected behavior, there may be some things that should be configured on the Segment end.
+
+[:point_right:](_5_applying_the_segment_block.md) Continue to [Applying the Segment Block](_5_applying_the_segment_block.md)
+
+[:point_left:](_3_table_structure.md) Back to [Table Structure](_3_table_structure.md)
+
+[:house:](README.md) README [Table of Contents](README.md)
