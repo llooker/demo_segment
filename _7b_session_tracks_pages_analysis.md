@@ -13,3 +13,9 @@ C. **Session Track Pages** <C_session_pg_tracks>- Creates sessions from Mapped E
 D. **Event Facts** <D_event_facts>- Maps events to session ids. This table will the starting point for exploration as it contains all the necessary keys (Session ID, Universal User ID) for all relevant joins. Session or User fact tables can be created from Event facts to speed up query results. 
 
 Looker Model - These individual files can be integrated in the Pages Model File <pages>. Event_id is NOT the primary key for Events, so joins must use multiple identifiers on required fields, like anonymous_id, received_at, and event_id. Also event_id may be called id, just swap the name.
+
+[:point_right:](_8_sample_advanced_design_patterns.md) Continue to [Sample Advanced Design Patterns](_8_sample_advanced_design_patterns.md)
+
+[:point_left:](_7_session_creation_overview.md) Back to [Session Creation Overview](_7_session_creation_overview.md)
+
+[:house:](README.md) README [Table of Contents](README.md)
