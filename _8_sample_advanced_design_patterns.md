@@ -17,4 +17,8 @@ For specifically analyzing the order of events in a session, the tracks_flow des
 * **User Fact Tables**
 6_user_session_facts is an example fact table that uses mapped user ids and sessions to derive metrics like first date, last date, and total count of sessions to be used in things like retention and cohort analysis. It can be joined back to both event tables (pages, tracks) and session tables as needed on the mapped visitor id.
 
+[:point_right:](_9_dashboards.md) Continue to [Dashboards](_9_dashboards.md)
 
+[:point_left:](_7_session_creation_overview.md) Back to [Session Creation Overview](_7_session_creation_overview.md)
+
+[:house:](README.md) README [Table of Contents](README.md)
