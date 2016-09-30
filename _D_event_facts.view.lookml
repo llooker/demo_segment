@@ -1,3 +1,4 @@
+
 - view: event_facts
   derived_table:
   
@@ -10,7 +11,7 @@
         select t.received_at 
           , t.anonymous_id
           , t.event_id
-          , t.event
+          , t.uuid as uuid
           , t.event_source
           , s.session_id
           , t.looker_visitor_id
@@ -31,9 +32,9 @@
 #     hidden: true
     sql: ${TABLE}.event_id
   
-  - dimension: event
-#     hidden: true
-    sql: ${TABLE}.event
+  - dimension: uuid
+    type: string
+    sql: ${TABLE}.uuid
 
   - dimension: session_id
     sql: ${TABLE}.session_id
@@ -68,3 +69,5 @@
   - measure: count_visitors
     type: count_distinct
     sql: ${looker_visitor_id}
+    
+    

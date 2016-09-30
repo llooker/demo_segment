@@ -8,14 +8,14 @@
   - name: date
     title: "Date"
     type: date_filter
-    default_value: 2014
+    default_value: 2016
 
   elements:
     
   - name: page_views
     title: Total Pageviews
     type: single_value
-    model: demo_segment
+    model: pages
     explore: pages
     measures: [pages.count_pageviews, pages.count_distinct_pageviews, pages.avg_page_view_duration_minutes,
       pages.count_visitors]
@@ -36,7 +36,7 @@
   - name: distinct_page_views
     title: Distinct Pageviews
     type: single_value
-    model: demo_segment
+    model: pages
     explore: pages
     measures: [pages.count_pageviews, pages.count_distinct_pageviews, pages.avg_page_view_duration_minutes,
       pages.count_visitors]
@@ -57,13 +57,13 @@
   - name: user_count
     title: User Count
     type: single_value
-    model: demo_segment
+    model: pages
     explore: pages
     measures: [pages.count_pageviews, pages.count_distinct_pageviews, pages.avg_page_view_duration_minutes,
       pages.count_visitors]
     hidden_fields: [pages.count_pageviews, pages.count_distinct_pageviews, pages.avg_page_view_duration_minutes]
     listen: 
-      date: pages.sent_date
+      date: pages.received_date
     sorts: [pages.count_visitors desc]
     limit: 500
     custom_color_enabled: false
@@ -77,13 +77,13 @@
   - name: pageview_minutes
     title: Average Pageview Minutes
     type: single_value
-    model: demo_segment
+    model: pages
     explore: pages
     measures: [pages.count_pageviews, pages.count_distinct_pageviews, pages.avg_page_view_duration_minutes,
       pages.count_visitors]
     hidden_fields: [pages.count_pageviews, pages.count_distinct_pageviews, pages.count_visitors]
     listen: 
-      date: pages.sent_date
+      date: pages.received_date
     sorts: [pages.avg_page_view_duration_minutes desc]
     limit: 500
     custom_color_enabled: false
@@ -97,13 +97,13 @@
   - name: daily_page_views
     title: Daily Page Views
     type: looker_line
-    model: demo_segment
+    model: pages
     explore: pages
-    dimensions: [pages.sent_date]
+    dimensions: [pages.received_date]
     measures: [pages.count_pageviews, pages.count_distinct_pageviews]
-    sorts: [pages.sent_date desc]
+    sorts: [pages.received_date desc]
     listen: 
-      date: pages.sent_date
+      date: pages.received_date
     limit: 500
     stacking: ''
     colors: ['#446c80', '#00b2d8']
@@ -126,17 +126,17 @@
     point_style: none
     interpolation: linear
     
-  - name: exit_page_freq
-    title: Exit Page Frequency
+  - name: page_view_name
+    title: Page Views by Type
     type: looker_pie
-    model: demo_segment
+    model: pages
     explore: pages
-    dimensions: [pages.path]
+    dimensions: [pages.name]
     measures: [pages.count_pageviews]
     filters:
       page_facts.is_last_page: 'Yes'
     listen: 
-      date: pages.sent_date
+      date: pages.received_date
     sorts: [pages.count_pageviews desc]
     colors: ['#446c80', '#00b2d8']
     limit: 500
@@ -146,7 +146,7 @@
   - name: page_stats
     title: Page Stats
     type: table
-    model: demo_segment
+    model: pages
     explore: pages
     dimensions: [pages.url]
     measures: [pages.avg_page_view_duration_minutes, pages.count_distinct_pageviews,
@@ -154,7 +154,7 @@
     filters:
       pages.avg_page_view_duration_minutes: NOT NULL
     listen: 
-      date: pages.sent_date
+      date: pages.received_date
     sorts: [pages.avg_page_view_duration_minutes desc]
     limit: 500
     width: 12

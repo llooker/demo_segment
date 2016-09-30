@@ -1,3 +1,4 @@
+
 - view: page_aliases_mapping
   derived_table:
     sql_trigger_value: select current_date
@@ -11,28 +12,28 @@
         select anonymous_id
         , user_id
         , received_at as received_at
-        from hoodie.tracks
+        from segment.tracks
             
         union
             
         select user_id
           , null
           , received_at
-        from hoodie.tracks
+        from segment.tracks
               
         union
                
         select anonymous_id
           , user_id
           , received_at
-        from hoodie.pages
+        from segment.pages
                
         union
                
         select user_id
         , null
         , received_at
-        from hoodie.pages
+        from segment.pages
       )
             
       select 
@@ -144,4 +145,3 @@
 #               left join realiases r8 on r7.next_alias = r8.alias
 #               left join realiases r9 on r8.next_alias = r9.alias
 # 
-

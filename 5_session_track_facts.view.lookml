@@ -1,3 +1,4 @@
+
 # Facts about a particular Session. 
 
 - view: session_trk_facts 
@@ -9,10 +10,10 @@
       SELECT s.session_id
         , MAX(map.received_at) AS ended_at
         , count(distinct map.event_id) AS num_pvs
-        , count(case when map.event = 'view_buy_page' then event_id else null end) as cnt_view_buy_page
-        , count(case when map.event = 'added_item' then event_id else null end) as cnt_added_item
-        , count(case when map.event = 'tapped_shipit' then event_id else null end) as cnt_shipit
-        , count(case when map.event = 'made_purchase' then event_id else null end) as cnt_made_purchase
+        , count(case when map.event = 'app_loaded' then event_id else null end) as cnt_app_loaded
+        , count(case when map.event = 'login' then event_id else null end) as cnt_login
+        , count(case when map.event = 'subscribed_to_blog' then event_id else null end) as cnt_subscribed_to_blog
+        , count(case when map.event = 'signup' then event_id else null end) as cnt_signup
       FROM ${sessions_trk.SQL_TABLE_NAME} AS s
       LEFT JOIN ${track_facts.SQL_TABLE_NAME} as map on map.session_id = s.session_id
       GROUP BY 1
@@ -39,42 +40,41 @@
     type: yesno
     sql: ${number_events} = 1
   
-  - dimension: view_buy_page
+  - dimension: app_loaded
     type: yesno
-    sql: ${TABLE}.cnt_view_buy_page > 0
+    sql: ${TABLE}.cnt_app_loaded > 0
   
-  - dimension: added_item
+  - dimension: login
     type: yesno
-    sql: ${TABLE}.cnt_added_item > 0
+    sql: ${TABLE}.cnt_login > 0
   
-  - dimension: tapped_shipit
+  - dimension: subscribed_to_blog
     type: yesno
-    sql: ${TABLE}.cnt_shipit > 0
+    sql: ${TABLE}.cnt_subscribed_to_blog > 0
     
-  - dimension: made_purchase
+  - dimension: signup
     type: yesno
-    sql: ${TABLE}.cnt_made_purchase > 0
+    sql: ${TABLE}.cnt_signup > 0
   
-  - measure: count_view_buy_page
+  - measure: count_app_loaded
     type: count
     filter: 
-      view_buy_page: yes
+      app_loaded: yes
       
-  - measure: count_added_item
+  - measure: count_login
     type: count
     filter: 
-      added_item: yes
+      login: yes
   
-  - measure: count_tapped_shipit
+  - measure: count_subscribed_to_blog
     type: count
     filter: 
-      tapped_shipit: yes
+      subscribed_to_blog: yes
   
-  - measure: count_made_purchase
+  - measure: count_signup
     type: count
     filter: 
-      made_purchase: yes
-
+      signup: yes
 
   
   sets:

@@ -1,9 +1,7 @@
-- connection: partners_segment
+- connection: segment_sources
 
 - include: "*.view.lookml"       # include all views in this project
-- include: "1_event_dashboard.dashboard.lookml"  # include all dashboards in this project
-- include: "2_session_dashboard.dashboard.lookml"  # include all dashboards in this project
-- include: "3_event_flow_dashboard.dashboard.lookml"  # include all dashboards in this project
+- include: "*.dashboard.lookml"  # include all dashboards in this project
 
 - explore: track_facts
   view_label: Events
@@ -14,11 +12,17 @@
       type: left_outer
       relationship: one_to_one
       sql_on: |
-        tracks.event_id = track_facts.event_id and 
+        tracks.uuid = track_facts.uuid and 
         tracks.received_at = track_facts.received_at and
         tracks.anonymous_id = track_facts.anonymous_id
 
     - join: sessions_trk
+      view_label: Sessions
+      type: left_outer
+      sql_on: ${track_facts.session_id} = ${sessions_trk.session_id}
+      relationship: many_to_one    
+
+    - join: accounts
       view_label: Sessions
       type: left_outer
       sql_on: ${track_facts.session_id} = ${sessions_trk.session_id}
@@ -71,3 +75,6 @@
     - join: users
       relationship: many_to_one
       sql_on: coalesce(users.mapped_user_id, users.user_id) = sessions.user_id
+      
+      
+      

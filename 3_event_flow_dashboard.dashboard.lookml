@@ -1,3 +1,4 @@
+
 - dashboard: 3_event_flow_dashboard
   title: Event Flow Analysis
   layout: tile
@@ -8,15 +9,15 @@
   - name: date
     title: "Date"
     type: date_filter
-    default_value: 2014
+    default_value: 2016
   
   - name: event
     title: 'First Event'
-    type: field_filter
+    type: text
     model: tracks
     explore: track_facts
-    field: tracks.event
-    default_value: 'signed_up'
+    field: track_facts.event
+    default_value: 'login'
     
   elements:
 
@@ -27,8 +28,8 @@
     explore: track_facts
     measures: [tracks.count, tracks_flow.event_2_drop_off, tracks_flow.event_3_drop_off,
       tracks_flow.event_4_drop_off, tracks_flow.event_5_drop_off]
-    listen:
-      event: tracks.event
+#     listen:
+#       event: tracks.event
     sorts: [tracks.count desc]
     limit: 500
     height: 4
@@ -59,9 +60,14 @@
     explore: track_facts
     dimensions: [tracks.event, tracks_flow.event_2, tracks_flow.event_3, tracks_flow.event_4,
       tracks_flow.event_5]
-    measures: [tracks.count, tracks.count_percent_of_total]
-    listen:
-      event: tracks.event
+    measures: [tracks.count]
+#     listen:
+#       event: tracks.event
+    filters:
+      tracks_flow.event_2: -NULL
+      tracks_flow.event_3: -NULL
+      tracks_flow.event_4: -NULL
+      tracks_flow.event_5: -NULL
     sorts: [tracks.count desc]
     height: 4
     width: 12
@@ -77,8 +83,13 @@
     explore: track_facts
     dimensions: [tracks_flow.event_2]
     measures: [tracks.count]
-    listen:
-      event: tracks.event
+#     listen:
+#       event: tracks.event
+    filters:
+      tracks_flow.event_2: -NULL
+      tracks_flow.event_3: -NULL
+      tracks_flow.event_4: -NULL
+      tracks_flow.event_5: -NULL
     sorts: [tracks.count desc]
     height: 4
     width: 3
@@ -108,8 +119,13 @@
     explore: track_facts
     dimensions: [tracks_flow.event_3]
     measures: [tracks.count]
-    listen:
-      event: tracks.event
+#     listen:
+#       event: tracks.event
+    filters:
+      tracks_flow.event_2: -NULL
+      tracks_flow.event_3: -NULL
+      tracks_flow.event_4: -NULL
+      tracks_flow.event_5: -NULL
     sorts: [tracks.count desc]
     limit: 5
     height: 4
@@ -139,8 +155,13 @@
     explore: track_facts
     dimensions: [tracks_flow.event_4]
     measures: [tracks.count]
-    listen:
-      event: tracks.event
+#     listen:
+#       event: tracks.event
+    filters:
+      tracks_flow.event_2: -NULL
+      tracks_flow.event_3: -NULL
+      tracks_flow.event_4: -NULL
+      tracks_flow.event_5: -NULL
     sorts: [tracks.count desc]
     limit: 5
     height: 4
@@ -170,8 +191,13 @@
     explore: track_facts
     dimensions: [tracks_flow.event_5]
     measures: [tracks.count]
-    listen:
-      event: tracks.event
+#     listen:
+#       event: tracks.event
+    filters:
+      tracks_flow.event_2: -NULL
+      tracks_flow.event_3: -NULL
+      tracks_flow.event_4: -NULL
+      tracks_flow.event_5: -NULL
     sorts: [tracks.count desc]
     limit: 5
     height: 4
@@ -201,8 +227,13 @@
     explore: track_facts
     dimensions: [tracks_flow.event_2]
     measures: [tracks.count, tracks.count_percent_of_total]
-    listen:
-      event: tracks.event
+#     listen:
+#       event: tracks.event
+    filters:
+      tracks_flow.event_2: -NULL
+      tracks_flow.event_3: -NULL
+      tracks_flow.event_4: -NULL
+      tracks_flow.event_5: -NULL
     sorts: [tracks.count desc]
     limit: 500
     height: 4
@@ -218,8 +249,13 @@
     explore: track_facts
     dimensions: [tracks_flow.event_3]
     measures: [tracks.count, tracks.count_percent_of_total]
-    listen:
-      event: tracks.event
+#     listen:
+#       event: tracks.event
+    filters:
+      tracks_flow.event_2: -NULL
+      tracks_flow.event_3: -NULL
+      tracks_flow.event_4: -NULL
+      tracks_flow.event_5: -NULL
     sorts: [tracks.count desc]
     limit: 500
     height: 4
@@ -235,8 +271,13 @@
     explore: track_facts
     dimensions: [tracks_flow.event_4]
     measures: [tracks.count, tracks.count_percent_of_total]
-    listen:
-      event: tracks.event
+#     listen:
+#       event: tracks.event
+    filters:
+      tracks_flow.event_2: -NULL
+      tracks_flow.event_3: -NULL
+      tracks_flow.event_4: -NULL
+      tracks_flow.event_5: -NULL
     sorts: [tracks.count desc]
     limit: 500
     height: 4
@@ -252,8 +293,13 @@
     explore: track_facts
     dimensions: [tracks_flow.event_5]
     measures: [tracks.count, tracks.count_percent_of_total]
-    listen:
-      event: tracks.event
+#     listen:
+#       event: tracks.event
+    filters:
+      tracks_flow.event_2: -NULL
+      tracks_flow.event_3: -NULL
+      tracks_flow.event_4: -NULL
+      tracks_flow.event_5: -NULL
     sorts: [tracks.count desc]
     limit: 500
     height: 4
@@ -261,3 +307,4 @@
     show_view_names: false
     show_row_numbers: true
     truncate_column_names: false
+    

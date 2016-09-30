@@ -1,3 +1,4 @@
+
 - view: mapped_events
   derived_table:
     sortkeys: [event_id]
@@ -7,27 +8,27 @@
       select *
         , datediff(minutes, lag(received_at) over(partition by looker_visitor_id order by received_at), received_at) as idle_time_minutes
       from (
-        select t.event_id || '-t' as event_id
+        select CONCAT(t.received_at, t.uuid) || '-t' as event_id
           , coalesce(a2v.looker_visitor_id,a2v.alias) as looker_visitor_id
           , t.anonymous_id
+          , t.uuid
           , t.received_at
-          , t.event as event
           , NULL as referrer
           , 'tracks' as event_source
-        from hoodie.tracks as t
+        from segment.tracks as t
         inner join ${page_aliases_mapping.SQL_TABLE_NAME} as a2v
           on a2v.alias = coalesce(t.user_id, t.anonymous_id)
           
         union all
                       
-        select t.event_id || '-p' as event_id
+        select CONCAT(t.received_at, t.uuid) || '-p' as event_id
           , coalesce(a2v.looker_visitor_id,a2v.alias)
           , t.anonymous_id
+          , t.uuid
           , t.received_at
-          , t.path as event
           , t.referrer as referrer
           , 'pages' as event_source
-        from hoodie.pages as t
+        from segment.pages as t
         inner join ${page_aliases_mapping.SQL_TABLE_NAME} as a2v
           on a2v.alias = coalesce(t.user_id, t.anonymous_id)                      
       ) as e 
@@ -43,6 +44,9 @@
   
   - dimension: anonymous_id
     sql: ${TABLE}.anonymous_id
+
+  - dimension: uuid
+    sql: ${TABLE}.uuid
 
   - dimension_group: received_at
     type: time
