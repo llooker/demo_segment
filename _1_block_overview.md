@@ -14,4 +14,6 @@
 
 Analyzing Segment data in Looker is easy. The [Segment Block](https://discourse.looker.com/t/looker-blocks-segment/1484) can be used with customer event data, and customers can use specific Source Blocks for cloud app sources like [Salesforce](https://discourse.looker.com/t/looker-blocks-salesforce/1481), [Zendesk](https://discourse.looker.com/t/looker-blocks-zendesk/1492), and [Stripe](https://discourse.looker.com/t/looker-blocks-stripe/2732).
 
--> Continue to [Configuring the Database Connection](_2_configuring_the_database_connection.md)
+:point_right: Continue to [Configuring the Database Connection](_2_configuring_the_database_connection.md)
+
+[:house:](README.md) README [Table of Contents](README.md)
