@@ -14,3 +14,8 @@ There is a set of base tables that can be included for each Segment schema (note
 
 Additional tables will exist **for each event type** in the format `<schema>.<event>`.  Additional metadata may be of use in these tables specific to certain event types, and joins to these tables will require additional customizations based on the clients requests, but can be handled after the initial model build. Note that id or event id of these tables is NOT a primary key. Approximating a Primary Key is generally possible by  
 
+[:point_right:](_4_initial_validation.md) Continue to [Initial Validation](_4_initial_validation.md)
+
+[:point_left:](_2_configuring_the_database_connection.md) Back to [Configuring the Database Connection](_2_configuring_the_database_connection.md)
+
+[:house:](README.md) README [Table of Contents](README.md)
