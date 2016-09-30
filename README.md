@@ -1,6 +1,6 @@
 ## Looker Segment Block
 
-Documetation is found in the included markdown files.
+Documentation is found in the included markdown files and linked below:
 
 1. [Block Overview](_1_block_overview.md)
 
@@ -8,7 +8,7 @@ Documetation is found in the included markdown files.
 
 1. [Table Structure](_3_table_structure.md)
 
-1. [Initial Validation](_4_inital_validation.md)
+1. [Initial Validation](_4_initial_validation.md)
 
 1. [Applying the Segment Block](_5_applying_the_segment_block.md)
 

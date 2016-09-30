@@ -26,7 +26,7 @@ The following table walks through what the tracks table would look like for two 
 The simplest version of this mapping table looks like the following:
 
 * Select anonymous IDs and User IDs from the base tracks (or tracks and pages) table and take the first non-null user_id for each anonymous_id.
-* Sample Looker View File: 1_alias_mapping.view.lookml
+* Sample Looker View File: [1_aliases_mapping](1_aliases_mapping.view.lookml)
 
 Anon ID | User ID
 ------- | -------
@@ -35,7 +35,7 @@ Anon ID | User ID
 11113 | NULL
 
 **Advanced User Mapping using the “Alias” base table.** 
-For most Segment implementations, the alias mapping file specified above should suffice. But for advanced user mapping where you would like to track User ID to User ID changes, refer to the following implementation (commented at the bottom of the 1_aliases_mapping view file).
+For most Segment implementations, the alias mapping file specified above should suffice. But for advanced user mapping where you would like to track User ID to User ID changes, refer to the following implementation (commented at the bottom of the [1_aliases_mapping](1_aliases_mapping.view.lookml) view file).
  
 Using the Aliases table (if exists) and the tables to used for event analysis and sessionization (Tracks and/or Pages), we can create an id mapping table using the following steps (which are commented in the view file):
  
@@ -86,3 +86,9 @@ select distinct alias
 ```
 
 Then we basically join the table onto itself as many times as we think is necessary to get the most accurate mapping, as shown in the final step. We then have 2 fields: alias and looker_visitor_id, that we can use to map events later in the model to a universal user id.
+
+[:point_right:](_7_session_creation_overview.md) Continue to [Session Creation Overview](_7_session_creation_overview.md)
+
+[:point_left:](_5_applying_the_segment_block.md) Back to [Applying the Segment Block](_5_applying_the_segment_block.md)
+
+[:house:](README.md) README [Table of Contents](README.md)
