@@ -16,7 +16,7 @@
     title: Total Pageviews
     type: single_value
     model: pages
-    explore: pages
+    explore: event_facts
     measures: [pages.count_pageviews, pages.count_distinct_pageviews, pages.avg_page_view_duration_minutes,
       pages.count_visitors]
     hidden_fields: [pages.count_distinct_pageviews, pages.avg_page_view_duration_minutes,
@@ -37,7 +37,7 @@
     title: Distinct Pageviews
     type: single_value
     model: pages
-    explore: pages
+    explore: event_facts
     measures: [pages.count_pageviews, pages.count_distinct_pageviews, pages.avg_page_view_duration_minutes,
       pages.count_visitors]
     hidden_fields: [pages.count_pageviews, pages.avg_page_view_duration_minutes,
@@ -58,7 +58,7 @@
     title: User Count
     type: single_value
     model: pages
-    explore: pages
+    explore: event_facts
     measures: [pages.count_pageviews, pages.count_distinct_pageviews, pages.avg_page_view_duration_minutes,
       pages.count_visitors]
     hidden_fields: [pages.count_pageviews, pages.count_distinct_pageviews, pages.avg_page_view_duration_minutes]
@@ -78,7 +78,7 @@
     title: Average Pageview Minutes
     type: single_value
     model: pages
-    explore: pages
+    explore: event_facts
     measures: [pages.count_pageviews, pages.count_distinct_pageviews, pages.avg_page_view_duration_minutes,
       pages.count_visitors]
     hidden_fields: [pages.count_pageviews, pages.count_distinct_pageviews, pages.count_visitors]
@@ -98,7 +98,7 @@
     title: Daily Page Views
     type: looker_line
     model: pages
-    explore: pages
+    explore: event_facts
     dimensions: [pages.received_date]
     measures: [pages.count_pageviews, pages.count_distinct_pageviews]
     sorts: [pages.received_date desc]
@@ -130,7 +130,7 @@
     title: Page Views by Type
     type: looker_pie
     model: pages
-    explore: pages
+    explore: event_facts
     dimensions: [pages.name]
     measures: [pages.count_pageviews]
     filters:
@@ -147,7 +147,7 @@
     title: Page Stats
     type: table
     model: pages
-    explore: pages
+    explore: event_facts
     dimensions: [pages.url]
     measures: [pages.avg_page_view_duration_minutes, pages.count_distinct_pageviews,
       pages.count_pageviews, pages.count_visitors]
