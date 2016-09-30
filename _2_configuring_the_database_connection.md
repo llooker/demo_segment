@@ -14,3 +14,8 @@ Additionally, because we need to accommodate for scaling event data that may bec
 * 30 minute time-out window has been removed from queries. By default, Segment terminates queries at 30 minutes, this needs to be removed for PDT creation to complete in many cases.
 * Insure customer is on cluster scaling plan. Segment should resize the Redshift cluster when it reaches 50% utilization so that querying is performant.
 
+[:point_right:](_3_table_structure.md) Continue to [Table Structure](_3_table_structure.md)
+
+[:point_left:](_1_block_overview.md) Back to [Block Overview](_1_block_overview.md)
+
+[:house:](README.md) README [Table of Contents](README.md)
