@@ -1,3 +1,4 @@
+
 - view: session_pg_trk_facts
   derived_table:
     

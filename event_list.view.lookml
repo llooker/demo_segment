@@ -1,3 +1,5 @@
+
+
 # Derived Table of Event Names used for Filter Suggestions
 
 - view: event_list
@@ -8,7 +10,7 @@
     sql: |
       SELECT
         event as event_types
-      FROM hoodie.tracks
+      FROM segment.tracks
       GROUP BY 1
     
   fields:

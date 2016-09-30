@@ -9,12 +9,13 @@
       select *
         , datediff(minutes, lag(received_at) over(partition by looker_visitor_id order by received_at), received_at) as idle_time_minutes
         from (
-          select t.event_id as event_id
+          select CONCAT(t.received_at, t.uuid) as event_id
           , t.anonymous_id
           , a2v.looker_visitor_id
           , t.received_at
           , t.event as event
-          from hoodie.tracks as t
+          , t.uuid
+          from segment.tracks as t
           inner join ${aliases_mapping.SQL_TABLE_NAME} as a2v
           on a2v.alias = coalesce(t.user_id, t.anonymous_id)
         )
@@ -24,6 +25,9 @@
 
   - dimension: anonymous_id
     sql: ${TABLE}.anonymous_id
+
+  - dimension: uuid
+    sql: ${TABLE}.uuid
     
   - dimension: event_id
     sql: ${TABLE}.event_id

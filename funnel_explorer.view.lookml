@@ -1,3 +1,4 @@
+
 - view: funnel_explorer
   derived_table:
     sql: |
@@ -95,3 +96,5 @@
         event3_time: NOT NULL
         event1_before_event2: TRUE
         event2_before_event3: TRUE
+        
+        

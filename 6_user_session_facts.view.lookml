@@ -1,3 +1,5 @@
+
+
 - view: user_session_facts
   derived_table:
     sql_trigger_value: SELECT CURRENT_DATE
@@ -40,3 +42,4 @@
       type: time
       timeframes: [date, week, month]
       sql: ${TABLE}.last_date
+      

@@ -1,3 +1,4 @@
+
 - dashboard: 2_session_dashboard
   title: Sessions Overview
   layout: tile
@@ -8,7 +9,7 @@
   - name: date
     title: "Date"
     type: date_filter
-    default_value: 2014
+    default_value: 2016
     
   elements:
 
@@ -48,7 +49,7 @@
       date: sessions_trk.start_date
     sorts: [sessions_trk.avg_sessions_per_user desc]
     limit: 500
-    total: false
+    total: false 
     font_size: medium
     width: 3
     height: 2
@@ -71,7 +72,7 @@
 
   
   - name: add_a_unique_name_47
-    title: Daily Session Count
+    title: Daily Session Count - Bounce Analysis
     type: looker_area
     model: tracks
     explore: sessions_trk
@@ -152,13 +153,13 @@
     type: looker_area
     model: tracks
     explore: sessions_trk
-    dimensions: [user_session_facts.first_month, sessions_trk.start_month]
+    dimensions: [user_session_facts.first_month, sessions_trk.start_date]
     pivots: [user_session_facts.first_month]
     measures: [sessions_trk.count]
     colors: ['#fcd15c', '#485963','#446c80', '#00b2d8', orange]
-    filters:
-      sessions_trk.start_month: 2014/09/01 to 2015/03/01
-      user_session_facts.first_month: 2014/09/01 to 2015/03/01
+#     filters:
+#       sessions_trk.start_month: 2014/09/01 to 2015/03/01
+#       user_session_facts.first_month: 2014/09/01 to 2015/03/01
     sorts: [user_sessions_trk_facts.first_month desc, sessions_trk.start_month]
     limit: 500
     total: false
@@ -183,12 +184,12 @@
     type: table
     model: tracks
     explore: sessions_trk
-    dimensions: [sessions_trk.start_month, user_session_facts.first_month]
+    dimensions: [sessions_trk.start_date, user_session_facts.first_month]
     pivots: [sessions_trk.start_month]
     measures: [sessions_trk.count]
-    filters:
-      sessions_trk.start_month: 2014/09/01 to 2015/03/01
-      user_session_facts.first_month: 2014/09/01 to 2015/03/01
+#     filters:
+#       sessions_trk.start_month: 2014/09/01 to 2015/03/01
+#       user_session_facts.first_month: 2014/09/01 to 2015/03/01
     sorts: [user_sessions_trk_facts.first_month, sessions_trk.start_month desc, user_session_facts.first_month desc]
     limit: 500
     total: false
@@ -199,8 +200,8 @@
     type: looker_column
     model: tracks
     explore: sessions_trk
-    measures: [session_trk_facts.count_view_buy_page, session_trk_facts.count_added_item,
-      session_trk_facts.count_tapped_shipit, session_trk_facts.count_made_purchase]
+    measures: [session_trk_facts.count_app_loaded, session_trk_facts.count_login,
+      session_trk_facts.count_subscribed_to_blog, session_trk_facts.count_signup]
     listen:
       date: sessions_trk.start_date
     sorts: [session_trk_facts.count_view_buy_page desc]

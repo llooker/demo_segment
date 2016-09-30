@@ -1,7 +1,7 @@
-- connection: partners_segment
+- connection: segment_sources
 
 - include: "*.view.lookml"       # include all views in this project
-# - include: ".dashboard.lookml"  # include all dashboards in this project
+# - include: "*.dashboard.lookml"  # include all dashboards in this project
 
 # - explore: pages
 
@@ -13,7 +13,7 @@
     view_label: Events
     type: left_outer
     sql_on: |
-      event_facts.event_id = concat(pages.event_id, '-p')
+      event_facts.uuid = pages.uuid
       and event_facts.received_at = pages.received_at  
       and event_facts.anonymous_id = pages.anonymous_id
     relationship: one_to_one
@@ -26,7 +26,7 @@
       and event_facts.received_at = tracks.received_at  
       and event_facts.anonymous_id = tracks.anonymous_id
     relationship: one_to_one
-    fields: [context_app_build, context_device_model]
+    fields: []
   
   - join: page_facts
     view_label: Events
@@ -48,3 +48,5 @@
     type: left_outer
     sql_on: ${event_facts.session_id} = ${session_pg_trk_facts.session_id}
     relationship: many_to_one
+
+    

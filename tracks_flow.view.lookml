@@ -1,3 +1,4 @@
+
 - view: tracks_flow
   derived_table:
     sql: |

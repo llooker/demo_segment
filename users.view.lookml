@@ -1,64 +1,114 @@
 - view: users
-  derived_table:
-    sql_trigger_value: SELECT COUNT(1) FROM hoodie.identifies
-    sortkeys: [looker_visitor_id]
-    distkey: looker_visitor_id
-    sql: |
-      SELECT distinct a.*, b.looker_visitor_id 
-      FROM
-        (SELECT distinct user_id
-              , last_value(jeans ignore nulls) over (partition by user_id order by sent_at rows between unbounded preceding and unbounded following) as jeans
-              , last_value(shoe ignore nulls) over (partition by user_id order by sent_at rows between unbounded preceding and unbounded following) as shoe
-              , last_value(last_seen ignore nulls) over (partition by user_id order by sent_at rows between unbounded preceding and unbounded following) as last_seen
-              , last_value(shipping_address_city ignore nulls) over (partition by user_id order by sent_at rows between unbounded preceding and unbounded following) as city
-              , last_value(shipping_address_state ignore nulls) over (partition by user_id order by sent_at rows between unbounded preceding and unbounded following) as state
-              , last_value(shipping_address_zip ignore nulls) over (partition by user_id order by sent_at rows between unbounded preceding and unbounded following) as zip
-        FROM hoodie.identifies) as a
-      INNER JOIN ${aliases_mapping.SQL_TABLE_NAME} as b
-      ON b.alias = a.user_id 
-      
+  sql_table_name: segment.users
   fields:
 
-  - dimension: looker_visitor_id
+  - dimension: id
     primary_key: true
-    sql: ${TABLE}.looker_visitor_id
-    
-#   - dimension: user_id
-#     primary_key: true
-#     sql: ${TABLE}.user_id
+    type: string
+    sql: ${TABLE}.id
 
-  - dimension: jeans
-    sql: ${TABLE}.jeans
-  
-  - dimension: waist
-    sql: SPLIT_PART(${jeans},' ', 1)
-  
-  - dimension: length
-    sql: SPLIT_PART(${jeans},' ', 3)
+  - dimension: active
+    type: yesno
+    sql: ${TABLE}.active
 
-  - dimension: shoe
+  - dimension: alias
+    type: string
+    sql: ${TABLE}.alias
+
+  - dimension: chat_only
+    type: yesno
+    sql: ${TABLE}.chat_only
+
+  - dimension_group: created
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.created_at
+
+  - dimension: email
+    type: string
+    sql: ${TABLE}.email
+
+  - dimension: external_id
+    type: string
+    sql: ${TABLE}.external_id
+
+#   - dimension: id
+#     type: string
+#     sql: ${TABLE}.id
+
+  - dimension_group: last_login
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.last_login_at
+
+  - dimension: locale_id
     type: number
-    value_format_name: decimal_1
-    sql: ${TABLE}.shoe
+    sql: ${TABLE}.locale_id
 
-  - dimension: last_seen
-    sql: ${TABLE}.last_seen
+  - dimension: moderator
+    type: yesno
+    sql: ${TABLE}.moderator
 
-  - dimension: city
-    sql: ${TABLE}.city
+  - dimension: only_private_comments
+    type: yesno
+    sql: ${TABLE}.only_private_comments
 
-  - dimension: state
-    sql: ${TABLE}.state
+  - dimension: organization_id
+    type: number
+    # hidden: true
+    sql: ${TABLE}.organization_id
 
-  - dimension: zip
-    sql: ${TABLE}.zip
+  - dimension_group: received
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.received_at
 
+  - dimension: restricted_agent
+    type: yesno
+    sql: ${TABLE}.restricted_agent
+
+  - dimension: role
+    type: string
+    sql: ${TABLE}.role
+
+  - dimension: shared
+    type: yesno
+    sql: ${TABLE}.shared
+
+  - dimension: shared_agent
+    type: yesno
+    sql: ${TABLE}.shared_agent
+
+  - dimension: ticket_restriction
+    type: string
+    sql: ${TABLE}.ticket_restriction
+
+  - dimension_group: updated
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.updated_at
+
+  - dimension: verified
+    type: yesno
+    sql: ${TABLE}.verified
+
+  - measure: count
+    type: count
+    drill_fields: detail*
+
+
+  # ----- Sets of fields for drilling ------
   sets:
     detail:
-      - user_id
-      - jeans
-      - shoe
-      - last_seen
-      - city
-      - state
-      - zip
+    - id
+    - organizations.id
+    - added_email.count
+    - clicked_button.count
+    - created_a_project.count
+    - deleted_email.count
+    - groups.count
+    - identifies.count
+    - invited_team_member.count
+    - pages.count
+    - signup.count
+    - tracks.count

@@ -1,111 +1,53 @@
 - view: tracks
-  sql_table_name: hoodie.tracks
+  sql_table_name: segment.tracks
   fields:
 
-# Required Fields
-
-  - dimension: event_id
-    primary_key: true
-    sql: ${TABLE}.event_id
-
   - dimension: anonymous_id
+    type: string
     sql: ${TABLE}.anonymous_id
-  
-  - dimension: user_id
-    sql: ${TABLE}.user_id
-    
-  - dimension_group: received
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.received_at 
-    
+
   - dimension: event
+    type: string
     sql: ${TABLE}.event
 
   - dimension: event_text
+    type: string
     sql: ${TABLE}.event_text
 
-
-# Additional Fields
-
-  - dimension: context_app_build
-    sql: ${TABLE}.context_app_build
-
-  - dimension: context_app_release_version
-    sql: ${TABLE}.context_app_release_version
-
-  - dimension: context_app_version
-    sql: ${TABLE}.context_app_version
-
-  - dimension: context_carrier
-    sql: ${TABLE}.context_carrier
-
-  - dimension: context_device_idfa
-    sql: ${TABLE}.context_device_idfa
-
-  - dimension: context_device_manufacturer
-    sql: ${TABLE}.context_device_manufacturer
-
-  - dimension: context_device_model
-    sql: ${TABLE}.context_device_model
-
-  - dimension: context_device_type
-    sql: ${TABLE}.context_device_type
-
-  - dimension: context_ip
-    sql: ${TABLE}.context_ip
-
-  - dimension: context_library_name
-    sql: ${TABLE}.context_library_name
-
-  - dimension: context_library_version
-    sql: ${TABLE}.context_library_version
-
-  - dimension: context_os
-    sql: ${TABLE}.context_os
-
-  - dimension: context_os_name
-    sql: ${TABLE}.context_os_name
-
-  - dimension: context_os_version
-    sql: ${TABLE}.context_os_version
-
-  - dimension: context_screen_height
-    type: number
-    sql: ${TABLE}.context_screen_height
-
-  - dimension: context_screen_width
-    type: number
-    sql: ${TABLE}.context_screen_width
-
-  - dimension: context_user_agent
-    sql: ${TABLE}.context_user_agent
-
-#   - dimension_group: send
-#     type: time                               ##DEPRECATED
-#     timeframes: [time, date, week, month]
-#     sql: ${TABLE}.send_at
-    
-  - dimension_group: sent
+  - dimension_group: received
     type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.sent_at  
+    timeframes: [raw, time, date, week, month]
+    sql: ${TABLE}.received_at
+
+  - dimension: user_id
+    type: string
+    # hidden: true
+    sql: ${TABLE}.user_id
+
+  - dimension: uuid
+    type: number
+    value_format_name: id
+    sql: ${TABLE}.uuid
+    
+  - dimension: event_id
+    type: string
+    sql: CONCAT(${received_raw}, ${uuid})
 
   - measure: count
     type: count
-    drill_fields: [context_library_name, context_os_name]
-
+    drill_fields: [users.id]
+    
 
 ## Advanced Fields (require joins to other views) 
 
   - dimension_group: weeks_since_first_visit
     type: number
-    sql: FLOOR(DATEDIFF(day,${user_session_facts.first_date}, ${sent_date})/7)
+    sql: FLOOR(DATEDIFF(day,${user_session_facts.first_date}, ${received_date})/7)
 
   - dimension: is_new_user
     sql:  |
         CASE 
-        WHEN ${sent_date} = ${user_session_facts.first_date} THEN 'New User'
+        WHEN ${received_date} = ${user_session_facts.first_date} THEN 'New User'
         ELSE 'Returning User' END
   
   - measure: count_percent_of_total
@@ -208,3 +150,4 @@
         )
       )
       
+    

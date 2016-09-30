@@ -1,5 +1,6 @@
-# Determines event sequence numbers within session
 
+
+# Determines event sequence numbers within session
 
 - view: track_facts 
   derived_table:
@@ -10,6 +11,7 @@
         select t.anonymous_id 
             , t.received_at
             , t.event_id
+            , t.uuid
             , t.event
             , s.session_id
             , t.looker_visitor_id
@@ -28,8 +30,12 @@
     sql: ${TABLE}.event_id
   
   - dimension: event
-    hidden: true
+#     hidden: true
     sql: ${TABLE}.event
+
+  - dimension: uuid
+    hidden: true
+    sql: ${TABLE}.uuid
 
   - dimension: session_id
     sql: ${TABLE}.session_id

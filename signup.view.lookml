@@ -1,15 +1,10 @@
-- view: identifies
-
-  sql_table_name: segment.identifies
+- view: signup
+  sql_table_name: segment.signup
   fields:
 
   - dimension: anonymous_id
     type: string
     sql: ${TABLE}.anonymous_id
-
-  - dimension: email
-    type: string
-    sql: ${TABLE}.email
 
   - dimension_group: received
     type: time
@@ -21,6 +16,16 @@
     # hidden: true
     sql: ${TABLE}.user_id
 
+  - dimension: uuid
+    type: number
+    value_format_name: id
+    sql: ${TABLE}.uuid
+
+  - dimension: workspace_id
+    type: string
+    sql: ${TABLE}.workspace_id
+
   - measure: count
     type: count
     drill_fields: [users.id]
+
