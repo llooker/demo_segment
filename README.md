@@ -18,7 +18,7 @@ Documentation is found in the included markdown files and linked below:
 
   a. [Session Tracks Analysis](_7a_session_tracks_analysis.md)
   
-  b. [Session Tracks and Pages Analysis] (_7b_session_tracks_pages_analysis.md)
+  b. [Session Tracks and Pages Analysis](_7b_session_tracks_pages_analysis.md)
 
 1. [Sample Advanced Design Patterns](_8_sample_advanced_design_patterns.md)
 
