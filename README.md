@@ -22,4 +22,4 @@ Documentation is found in the included markdown files and linked below:
 
 1. [Sample Advanced Design Patterns](_8_sample_advanced_design_patterns.md)
 
-1. [Dashboards] (_9_dashboards.md)
+1. [Dashboards](_9_dashboards.md)
