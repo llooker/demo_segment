@@ -22,12 +22,6 @@
       sql_on: ${track_facts.session_id} = ${sessions_trk.session_id}
       relationship: many_to_one    
 
-    - join: accounts
-      view_label: Sessions
-      type: left_outer
-      sql_on: ${track_facts.session_id} = ${sessions_trk.session_id}
-      relationship: many_to_one
-
     - join: session_trk_facts
       view_label: Sessions
       type: left_outer
