@@ -10,7 +10,7 @@
     title: "Date"
     type: date_filter
     default_value: 2016
-    
+
   elements:
 
   - name: add_a_unique_name_787
@@ -25,7 +25,7 @@
     limit: 500
     width: 3
     height: 2
-  
+
   - name: add_a_unique_name_425
     title: Distinct Visitors
     type: single_value
@@ -38,7 +38,7 @@
     limit: 500
     width: 3
     height: 2
-  
+
   - name: add_a_unique_name_676
     title: Average Sessions Per User
     type: single_value
@@ -49,11 +49,11 @@
       date: sessions_trk.start_date
     sorts: [sessions_trk.avg_sessions_per_user desc]
     limit: 500
-    total: false 
+    total: false
     font_size: medium
     width: 3
     height: 2
-  
+
   - name: add_a_unique_name_804
     title: Average Session Duration
     type: single_value
@@ -70,7 +70,7 @@
     height: 2
 
 
-  
+
   - name: add_a_unique_name_47
     title: Daily Session Count - Bounce Analysis
     type: looker_area
@@ -132,7 +132,7 @@
     point_style: none
     interpolation: linear
     width: 8
-  
+
   - name: add_a_unique_name_692
     title: New User Session Percentage
     type: looker_pie
@@ -178,7 +178,7 @@
     point_style: none
     interpolation: linear
     width: 8
-  
+
   - name: add_a_unique_name_113
     title: Customer Cohorts
     type: table
@@ -194,7 +194,7 @@
     limit: 500
     total: false
     width: 4
-  
+
   - name: add_a_unique_name_629
     title: Conversion Funnel
     type: looker_column

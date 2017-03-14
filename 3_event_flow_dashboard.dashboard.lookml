@@ -10,7 +10,7 @@
     title: "Date"
     type: date_filter
     default_value: 2016
-  
+
   - name: event
     title: 'First Event'
     type: text
@@ -18,7 +18,7 @@
     explore: track_facts
     field: track_facts.event
     default_value: 'login'
-    
+
   elements:
 
   - name: tracks_drop_off
@@ -52,7 +52,7 @@
     x_axis_scale: auto
     show_null_labels: false
     show_dropoff: true
-  
+
   - name: event_flow
     title: Event Flow
     type: table
@@ -307,4 +307,3 @@
     show_view_names: false
     show_row_numbers: true
     truncate_column_names: false
-    

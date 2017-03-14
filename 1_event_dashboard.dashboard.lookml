@@ -17,7 +17,7 @@
 #     explore: track_facts
 #     field: tracks.event
 #     default_value: 'login'
-    
+
   elements:
 
   - name: unique_users
@@ -34,7 +34,7 @@
     font_size: medium
     width: 4
     height: 2
-  
+
 
 
   - name: add_a_unique_name_4380
@@ -51,7 +51,7 @@
     font_size: medium
     width: 4
     height: 2
-  
+
   - name: add_a_unique_name_863
     title: Pages Count
     type: single_value
@@ -94,7 +94,7 @@
 #     limit: 500
 #     width: 6
 #     height: 4
-  
+
 #   - name: add_a_unique_name_203
 #     title: Manufacturer Breakdown
 #     type: looker_pie
@@ -108,7 +108,7 @@
 #     limit: 500
 #     width: 3
 #     height: 3
-  
+
 #   - name: add_a_unique_name_11
 #     title: Top Device Models
 #     type: table
@@ -122,7 +122,7 @@
 #     limit: 50
 #     width: 6
 #     height: 4
-    
+
   - name: add_a_unique_name_110
     title: Daily Tracks Count
     type: looker_line
@@ -180,4 +180,3 @@
     show_y_axis_ticks: true
     x_axis_scale: auto
     show_null_labels: false
-  

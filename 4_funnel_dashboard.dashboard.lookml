@@ -4,7 +4,7 @@
   tile_size: 200
 
   filters:
-    
+
   - name: event1
     title: 'First Event'
     type: field_filter
@@ -12,7 +12,7 @@
     explore: track_facts
     field: track_facts.event
     default_value: 'signup'
-    
+
   - name: event2
     title: 'Second Event'
     type: field_filter
@@ -20,7 +20,7 @@
     explore: track_facts
     field: track_facts.event
     default_value: 'login'
-    
+
   - name: event3
     title: 'Third Event'
     type: field_filter
@@ -28,7 +28,7 @@
     explore: track_facts
     field: track_facts.event
     default_value: 'created_ticket'
-  
+
   elements:
 
   - name: add_a_unique_name_1475003582
