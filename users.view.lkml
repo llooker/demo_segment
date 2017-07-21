@@ -5,6 +5,7 @@ view: users {
     primary_key: yes
     type: string
     sql: ${TABLE}.id ;;
+    tags: ["segment_user_id"]
   }
 
   dimension: active {
@@ -29,9 +30,9 @@ view: users {
   }
 
   dimension: email {
-    tags: ["segment_user_id"]
     type: string
     sql: ${TABLE}.email ;;
+    tags: ["email"]
   }
 
   dimension: external_id {
