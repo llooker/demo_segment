@@ -29,7 +29,7 @@ view: users {
   }
 
   dimension: email {
-    tags: ["segment_user_id"]
+    tags: ["email"]
     type: string
     sql: ${TABLE}.email ;;
   }
