@@ -4,7 +4,6 @@ Track Analysis looks at “events” or “actions” such as a ≠≠button cli
 
 For Track Analysis, refer to the tracks model and the numbered View Files (ex. 1_, 2_, 3_...) in the Segment Block. 
 
-![tracks_image](http://gdurl.com/r6id)
 
 1. [**Alias Mapping**](1_aliases_mapping.view.lookml) - User ID Consolidation from Tracks Table 
 1. [**Mapped Tracks**](2_mapped_tracks.view.lookml) - Serves to map events to universal user id as first step in sessionization. Ranks events by User and get the time difference between one event to the next. 
