@@ -7,7 +7,7 @@ view: event_list {
     distribution_style: all
     sql: SELECT
         event as event_types
-      FROM segment.tracks
+      FROM javascript.tracks
       GROUP BY 1
        ;;
   }

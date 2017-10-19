@@ -14,7 +14,7 @@ view: mapped_tracks {
           , t.received_at
           , t.event as event
           , t.uuid
-          from segment.tracks as t
+          from javascript.tracks as t
           inner join ${aliases_mapping.SQL_TABLE_NAME} as a2v
           on a2v.alias = coalesce(t.user_id, t.anonymous_id)
         )

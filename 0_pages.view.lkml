@@ -1,5 +1,5 @@
 view: pages {
-  sql_table_name: segment.pages ;;
+  sql_table_name: javascript.pages ;;
 
   dimension: id {
     primary_key: yes

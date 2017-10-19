@@ -1,5 +1,5 @@
 view: groups {
-  sql_table_name: segment.groups ;;
+  sql_table_name: javascript.groups ;;
 
   dimension: group_id {
     primary_key: yes

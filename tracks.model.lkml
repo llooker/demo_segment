@@ -1,4 +1,4 @@
-connection: "segment_sources"
+connection: "redshift"
 
 # include all views in this project
 include: "*.view"
