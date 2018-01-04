@@ -1,4 +1,14 @@
-## Looker Segment Block
+### What does this Block do for me?
+
+**(1) Full-Fledged Data Model** - This Block, built by the experts on the product teams of both Looker and Segment, provides a comprehensive, robust data model and multiple curated dashboards for Segment data.
+
+**(2) Time-to-Value** - Start gaining value out of your Segment data immediately, leveraging the analysis suggested by the Segment team.
+
+**(3) Expert Analysis** - Follow individual user event streams, compare cross-platform performance, create customized user funnels, dynamically segment interesting user cohorts, and much more using this Block's flexible and customizable analysis.
+
+
+
+### Data Structure, Block Structure, and Implementation Instructions
 
 Documentation is found in the included markdown files and linked below:
 
@@ -17,7 +27,7 @@ Documentation is found in the included markdown files and linked below:
 1. [Session Creation Overview](_7_session_creation_overview.md)
 
   a. [Session Tracks Analysis](_7a_session_tracks_analysis.md)
-  
+
   b. [Session Tracks and Pages Analysis](_7b_session_tracks_pages_analysis.md)
 
 1. [Sample Advanced Design Patterns](_8_sample_advanced_design_patterns.md)
