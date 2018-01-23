@@ -65,6 +65,11 @@ view: session_trk_facts {
     sql: ${TABLE}.num_pvs ;;
   }
 
+  measure: count_events {
+    type: sum
+    sql: ${number_events} ;;
+  }
+
   measure: count_app_loaded {
     type: count
 

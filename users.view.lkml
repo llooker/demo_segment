@@ -79,11 +79,13 @@ view: users {
 
   dimension: restricted_agent {
     type: yesno
+    hidden: yes
     sql: ${TABLE}.restricted_agent ;;
   }
 
   dimension: role {
     type: string
+    hidden: yes
     sql: ${TABLE}.role ;;
   }
 
