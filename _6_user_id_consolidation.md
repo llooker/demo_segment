@@ -21,7 +21,7 @@ Anon ID | User ID | Event ID | Link ID
 11113 | NULL | 11 | | Third Visit
 11113 | NULL | 12 | | Third Visit
 
-The following table walks through what the tracks table would look like for two different user visits (sessions) for a single user. When the user visits the site, they are automatically assigned an Anonymous ID, which remains with them through their visit on the site. Once that user authenticates (logs in), we can assign a user ID to all the events they have performed since that point. In our example below, the User authenticates at Event 2 and Event 9 in their first and second visit. 
+The above table walks through what the tracks table would look like for two different user visits (sessions) for a single user. When the user visits the site, they are automatically assigned an Anonymous ID, which remains with them through their visit on the site. Once that user authenticates (logs in), we can assign a user ID to all the events they have performed since that point. In our example below, the User authenticates at Event 2 and Event 9 in their first and second visit. 
 
 The simplest version of this mapping table looks like the following:
 
